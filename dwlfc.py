@@ -1906,7 +1906,7 @@ for x in [btn1, btn2, btn3, btn4, btn5, btn6, btn7, btn8, btn9]:
 while True:
 
     if disable_preview or disable_preview_audio or audioing == True or settings == True:
-        frame = cv2.imread("/home/luqtas/Downloads/black.png")
+        frame = cv2.imread("/home/dwlfc/Downloads/black.png")
     elif mode in {"vda", "vdm"}:
         frame = cam.capture_array("lores")
         frame = cv2.cvtColor(frame, cv2.COLOR_YUV420p2RGB)
