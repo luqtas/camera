@@ -1,0 +1,15 @@
+[Unit]
+Description=starts dwlfc
+
+[Service]
+Environment=DISPLAY=:0
+Environment=XAUTHORITY=/home/dwlfc/.Xauthority
+ExecStart=/usr/bin/python3 /home/dwlfc/Downloads/dwlfc.py
+Restart=always
+RestartSec=10s
+KillMode=process
+TimeoutSec=infinity
+User=dwlfc
+
+[Install]
+WantedBy=graphical.target
