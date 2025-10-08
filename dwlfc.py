@@ -1,35 +1,3 @@
-# cd Downloads
-# git clone https://github.com/goodtft/LCD-show.git
-# chmod -R 755 LCD-show
-# cd LCD-show
-# sudo ./LCD24-3A+-show
-## if you still need to use the HDMI, after reboot do,
-### cd Downloads
-### cd LCD-show
-### sudo ./LCD-hdmi
-## remember that you need to change to display once you are ready
-### sudo ./LCD-show
-# sudo nano /boot/config.txt
-## add,
-### dtoverlay=googlevoicehat-soundcard
-## substitute dtoverlay=vc4-kms-v3d for,
-### dtoverlay=vc4-kms-v3d,cma-320
-### ACTUALLY NO, as this overlay doesn't allow us to use the TFT screen...
-### however if you intend to use a HDMI screen... this boost fits well
-## and at the end of the file modify these into,
-### dtoverlay=tft9341:rotate=270,speed=90000000,fps=60
-# sudo nano /etc/xdg/openbox/lxde-pi-rc.xml
-## then we need to find <applications> and add these lines
-### <application name="dwlfc">
-### <decor>no</decor>
-### </application>
-# sudo apt install python3-opencv
-# right click at the panel
-## Panel Settings
-### Advanced
-#### check "Minimise panel when not in use"
-## reboot
-
 from gpiozero import Button
 from threading import Timer
 from picamera2 import Picamera2, Preview, Metadata
@@ -44,6 +12,7 @@ from pathlib import Path
 import subprocess
 import os
 
+#username = os.getlogin()
 cam = Picamera2()
 
 display = False
@@ -1428,115 +1397,115 @@ def handle_btn_click(btn):
                             if mode == "vda":
                                 if vda_audio_mode == "stereo":
                                     if channels == 2:
-                                        x = ["arecord", "-r", "48000", "-f", "S32_LE", "/home/dwlfc/Downloads/records/%s-l.wav" % (actions)]
-                                        z = subprocess.Popen(x, shell=False)
+                                        x = ["arecord -D plughw:1 -r 48000 -f S32_LE /home/dwlfc/Downloads/records/%s-l.wav" % (actions)]
+                                        z = subprocess.Popen(x, shell=True)
                                     elif channels == 1:
-                                        x = ["arecord", "-r", "48000", "-f", "S32_LE", "/home/dwlfc/Downloads/records/%s-r.wav" % (actions)]
-                                        z = subprocess.Popen(x, shell=False)
+                                        x = ["arecord -D plughw:1 -r 48000 -f S32_LE /home/dwlfc/Downloads/records/%s-r.wav" % (actions)]
+                                        z = subprocess.Popen(x, shell=True)
                                 elif vda_audio_mode == "5.1":
                                     if channels == 6:
-                                        x = ["arecord", "-r", "48000", "-f", "S32_LE", "/home/dwlfc/Downloads/records/%s-sw.wav" % (actions)]
-                                        z = subprocess.Popen(x, shell=False)
+                                        x = ["arecord -D plughw:1 -r 48000 -f S32_LE /home/dwlfc/Downloads/records/%s-sw.wav" % (actions)]
+                                        z = subprocess.Popen(x, shell=True)
                                     elif channels == 5:
-                                        x = ["arecord", "-r", "48000", "-f", "S32_LE", "/home/dwlfc/Downloads/records/%s-ct.wav" % (actions)]
-                                        z = subprocess.Popen(x, shell=False)
+                                        x = ["arecord -D plughw:1 -r 48000 -f S32_LE /home/dwlfc/Downloads/records/%s-ct.wav" % (actions)]
+                                        z = subprocess.Popen(x, shell=True)
                                     elif channels == 4:
-                                        x = ["arecord", "-r", "48000", "-f", "S32_LE", "/home/dwlfc/Downloads/records/%s-fl.wav" % (actions)]
-                                        z = subprocess.Popen(x, shell=False)
+                                        x = ["arecord -D plughw:1 -r 48000 -f S32_LE /home/dwlfc/Downloads/records/%s-fl.wav" % (actions)]
+                                        z = subprocess.Popen(x, shell=True)
                                     elif channels == 3:
-                                        x = ["arecord", "-r", "48000", "-f", "S32_LE", "/home/dwlfc/Downloads/records/%s-fr.wav" % (actions)]
-                                        z = subprocess.Popen(x, shell=False)
+                                        x = ["arecord -D plughw:1 -r 48000 -f S32_LE /home/dwlfc/Downloads/records/%s-fr.wav" % (actions)]
+                                        z = subprocess.Popen(x, shell=True)
                                     elif channels == 2:
-                                        x = ["arecord", "-r", "48000", "-f", "S32_LE", "/home/dwlfc/Downloads/records/%s-rl.wav" % (actions)]
-                                        z = subprocess.Popen(x, shell=False)
+                                        x = ["arecord -D plughw:1 -r 48000 -f S32_LE /home/dwlfc/Downloads/records/%s-rl.wav" % (actions)]
+                                        z = subprocess.Popen(x, shell=True)
                                     elif channels == 1:
-                                        x = ["arecord", "-r", "48000", "-f", "S32_LE", "/home/dwlfc/Downloads/records/%s-rr.wav" % (actions)]
-                                        z = subprocess.Popen(x, shell=False)
+                                        x = ["arecord -D plughw:1 -r 48000 -f S32_LE /home/dwlfc/Downloads/records/%s-rr.wav" % (actions)]
+                                        z = subprocess.Popen(x, shell=True)
                                 elif vda_audio_mode == "7.1":
                                     if channels == 8:
-                                        x = ["arecord", "-r", "48000", "-f", "S32_LE", "/home/dwlfc/Downloads/records/%s-sw.wav" % (actions)]
-                                        z = subprocess.Popen(x, shell=False)
+                                        x = ["arecord -D plughw:1 -r 48000 -f S32_LE /home/dwlfc/Downloads/records/%s-sw.wav" % (actions)]
+                                        z = subprocess.Popen(x, shell=True)
                                     elif channels == 7:
-                                        x = ["arecord", "-r", "48000", "-f", "S32_LE", "/home/dwlfc/Downloads/records/%s-ct.wav" % (actions)]
-                                        z = subprocess.Popen(x, shell=False)
+                                        x = ["arecord -D plughw:1 -r 48000 -f S32_LE /home/dwlfc/Downloads/records/%s-ct.wav" % (actions)]
+                                        z = subprocess.Popen(x, shell=True)
                                     elif channels == 6:
-                                        x = ["arecord", "-r", "48000", "-f", "S32_LE", "/home/dwlfc/Downloads/records/%s-fl.wav" % (actions)]
-                                        z = subprocess.Popen(x, shell=False)
+                                        x = ["arecord -D plughw:1 -r 48000 -f S32_LE /home/dwlfc/Downloads/records/%s-fl.wav" % (actions)]
+                                        z = subprocess.Popen(x, shell=True)
                                     elif channels == 5:
-                                        x = ["arecord", "-r", "48000", "-f", "S32_LE", "/home/dwlfc/Downloads/records/%s-fr.wav" % (actions)]
-                                        z = subprocess.Popen(x, shell=False)
+                                        x = ["arecord -D plughw:1 -r 48000 -f S32_LE /home/dwlfc/Downloads/records/%s-fr.wav" % (actions)]
+                                        z = subprocess.Popen(x, shell=True)
                                     elif channels == 4:
-                                        x = ["arecord", "-r", "48000", "-f", "S32_LE", "/home/dwlfc/Downloads/records/%s-sl.wav" % (actions)]
-                                        z = subprocess.Popen(x, shell=False)
+                                        x = ["arecord -D plughw:1 -r 48000 -f S32_LE /home/dwlfc/Downloads/records/%s-sl.wav" % (actions)]
+                                        z = subprocess.Popen(x, shell=True)
                                     elif channels == 3:
-                                        x = ["arecord", "-r", "48000", "-f", "S32_LE", "/home/dwlfc/Downloads/records/%s-sr.wav" % (actions)]
-                                        z = subprocess.Popen(x, shell=False)
+                                        x = ["arecord -D plughw:1 -r 48000 -f S32_LE /home/dwlfc/Downloads/records/%s-sr.wav" % (actions)]
+                                        z = subprocess.Popen(x, shell=True)
                                     elif channels == 2:
-                                        x = ["arecord", "-r", "48000", "-f", "S32_LE", "/home/dwlfc/Downloads/records/%s-rl.wav" % (actions)]
-                                        z = subprocess.Popen(x, shell=False)
+                                        x = ["arecord -D plughw:1 -r 48000 -f S32_LE /home/dwlfc/Downloads/records/%s-rl.wav" % (actions)]
+                                        z = subprocess.Popen(x, shell=True)
                                     elif channels == 1:
-                                        x = ["arecord", "-r", "48000", "-f", "S32_LE", "/home/dwlfc/Downloads/records/%s-rr.wav" % (actions)]
-                                        z = subprocess.Popen(x, shell=False)
+                                        x = ["arecord -D plughw:1 -r 48000 -f S32_LE /home/dwlfc/Downloads/records/%s-rr.wav" % (actions)]
+                                        z = subprocess.Popen(x, shell=True)
                                 elif vda_audio_mode == "inf.":
                                     # since for the logic of inf. we set channels to 10 (which we can't go lower)
                                     # we subtract - 9 for the number of the record!
-                                    x = ["arecord", "-r", "48000", "-f", "S32_LE", "/home/dwlfc/Downloads/records/%s-%s.wav" % (actions, inf+1)]
-                                    z = subprocess.Popen(x, shell=False)
+                                    x = ["arecord -D plughw:1 -r 48000 -f S32_LE /home/dwlfc/Downloads/records/%s-%s.wav" % (actions, inf+1)]
+                                    z = subprocess.Popen(x, shell=True)
                             elif mode == "vdm":
                                 if vdm_audio_mode == "stereo":
                                     if channels == 2:
-                                        x = ["arecord", "-r", "48000", "-f", "S32_LE", "/home/dwlfc/Downloads/records/%s-l.wav" % (actions)]
-                                        z = subprocess.Popen(x, shell=False)
+                                        x = ["arecord -D plughw:1 -r 48000 -f S32_LE /home/dwlfc/Downloads/records/%s-l.wav" % (actions)]
+                                        z = subprocess.Popen(x, shell=True)
                                     elif channels == 1:
-                                        x = ["arecord", "-r", "48000", "-f", "S32_LE", "/home/dwlfc/Downloads/records/%s-r.wav" % (actions)]
-                                        z = subprocess.Popen(x, shell=False)
+                                        x = ["arecord -D plughw:1 -r 48000 -f S32_LE /home/dwlfc/Downloads/records/%s-r.wav" % (actions)]
+                                        z = subprocess.Popen(x, shell=True)
                                 elif vdm_audio_mode == "5.1":
                                     if channels == 6:
-                                        x = ["arecord", "-r", "48000", "-f", "S32_LE", "/home/dwlfc/Downloads/records/%s-sw.wav" % (actions)]
-                                        z = subprocess.Popen(x, shell=False)
+                                        x = ["arecord -D plughw:1 -r 48000 -f S32_LE /home/dwlfc/Downloads/records/%s-sw.wav" % (actions)]
+                                        z = subprocess.Popen(x, shell=True)
                                     elif channels == 5:
-                                        x = ["arecord", "-r", "48000", "-f", "S32_LE", "/home/dwlfc/Downloads/records/%s-ct.wav" % (actions)]
-                                        z = subprocess.Popen(x, shell=False)
+                                        x = ["arecord -D plughw:1 -r 48000 -f S32_LE /home/dwlfc/Downloads/records/%s-ct.wav" % (actions)]
+                                        z = subprocess.Popen(x, shell=True)
                                     elif channels == 4:
-                                        x = ["arecord", "-r", "48000", "-f", "S32_LE", "/home/dwlfc/Downloads/records/%s-fl.wav" % (actions)]
-                                        z = subprocess.Popen(x, shell=False)
+                                        x = ["arecord -D plughw:1 -r 48000 -f S32_LE /home/dwlfc/Downloads/records/%s-fl.wav" % (actions)]
+                                        z = subprocess.Popen(x, shell=True)
                                     elif channels == 3:
-                                        x = ["arecord", "-r", "48000", "-f", "S32_LE", "/home/dwlfc/Downloads/records/%s-fr.wav" % (actions)]
-                                        z = subprocess.Popen(x, shell=False)
+                                        x = ["arecord -D plughw:1 -r 48000 -f S32_LE /home/dwlfc/Downloads/records/%s-fr.wav" % (actions)]
+                                        z = subprocess.Popen(x, shell=True)
                                     elif channels == 2:
-                                        x = ["arecord", "-r", "48000", "-f", "S32_LE", "/home/dwlfc/Downloads/records/%s-rl.wav" % (actions)]
-                                        z = subprocess.Popen(x, shell=False)
+                                        x = ["arecord -D plughw:1 -r 48000 -f S32_LE /home/dwlfc/Downloads/records/%s-rl.wav" % (actions)]
+                                        z = subprocess.Popen(x, shell=True)
                                     elif channels == 1:
-                                        x = ["arecord", "-r", "48000", "-f", "S32_LE", "/home/dwlfc/Downloads/records/%s-rr.wav" % (actions)]
-                                        z = subprocess.Popen(x, shell=False)
+                                        x = ["arecord -D plughw:1 -r 48000 -f S32_LE /home/dwlfc/Downloads/records/%s-rr.wav" % (actions)]
+                                        z = subprocess.Popen(x, shell=True)
                                 elif vdm_audio_mode == "7.1":
                                     if channels == 8:
-                                        x = ["arecord", "-r", "48000", "-f", "S32_LE", "/home/dwlfc/Downloads/records/%s-sw.wav" % (actions)]
-                                        z = subprocess.Popen(x, shell=False)
+                                        x = ["arecord -D plughw:1 -r 48000 -f S32_LE /home/dwlfc/Downloads/records/%s-sw.wav" % (actions)]
+                                        z = subprocess.Popen(x, shell=True)
                                     elif channels == 7:
-                                        x = ["arecord", "-r", "48000", "-f", "S32_LE", "/home/dwlfc/Downloads/records/%s-ct.wav" % (actions)]
-                                        z = subprocess.Popen(x, shell=False)
+                                        x = ["arecord -D plughw:1 -r 48000 -f S32_LE /home/dwlfc/Downloads/records/%s-ct.wav" % (actions)]
+                                        z = subprocess.Popen(x, shell=True)
                                     elif channels == 6:
-                                        x = ["arecord", "-r", "48000", "-f", "S32_LE", "/home/dwlfc/Downloads/records/%s-fl.wav" % (actions)]
-                                        z = subprocess.Popen(x, shell=False)
+                                        x = ["arecord -D plughw:1 -r 48000 -f S32_LE /home/dwlfc/Downloads/records/%s-fl.wav" % (actions)]
+                                        z = subprocess.Popen(x, shell=True)
                                     elif channels == 5:
-                                        x = ["arecord", "-r", "48000", "-f", "S32_LE", "/home/dwlfc/Downloads/records/%s-fr.wav" % (actions)]
-                                        z = subprocess.Popen(x, shell=False)
+                                        x = ["arecord -D plughw:1 -r 48000 -f S32_LE /home/dwlfc/Downloads/records/%s-fr.wav" % (actions)]
+                                        z = subprocess.Popen(x, shell=True)
                                     elif channels == 4:
-                                        x = ["arecord", "-r", "48000", "-f", "S32_LE", "/home/dwlfc/Downloads/records/%s-sl.wav" % (actions)]
-                                        z = subprocess.Popen(x, shell=False)
+                                        x = ["arecord -D plughw:1 -r 48000 -f S32_LE /home/dwlfc/Downloads/records/%s-sl.wav" % (actions)]
+                                        z = subprocess.Popen(x, shell=True)
                                     elif channels == 3:
-                                        x = ["arecord", "-r", "48000", "-f", "S32_LE", "/home/dwlfc/Downloads/records/%s-sr.wav" % (actions)]
-                                        z = subprocess.Popen(x, shell=False)
+                                        x = ["arecord -D plughw:1 -r 48000 -f S32_LE /home/dwlfc/Downloads/records/%s-sr.wav" % (actions)]
+                                        z = subprocess.Popen(x, shell=True)
                                     elif channels == 2:
-                                        x = ["arecord", "-r", "48000", "-f", "S32_LE", "/home/dwlfc/Downloads/records/%s-rl.wav" % (actions)]
-                                        z = subprocess.Popen(x, shell=False)
+                                        x = ["arecord -D plughw:1 -r 48000 -f S32_LE /home/dwlfc/Downloads/records/%s-rl.wav" % (actions)]
+                                        z = subprocess.Popen(x, shell=True)
                                     elif channels == 1:
-                                        x = ["arecord", "-r", "48000", "-f", "S32_LE", "/home/dwlfc/Downloads/records/%s-rr.wav" % (actions)]
-                                        z = subprocess.Popen(x, shell=False)
+                                        x = ["arecord -D plughw:1 -r 48000 -f S32_LE /home/dwlfc/Downloads/records/%s-rr.wav" % (actions)]
+                                        z = subprocess.Popen(x, shell=True)
                                 elif vdm_audio_mode == "inf.":
-                                    x = ["arecord", "-r", "48000", "-f", "S32_LE", "/home/dwlfc/Downloads/records/%s-%s.wav" % (actions, inf+1)]
-                                    z = subprocess.Popen(x, shell=False)
+                                    x = ["arecord -D plughw:1 -r 48000 -f S32_LE /home/dwlfc/Downloads/records/%s-%s.wav" % (actions, inf+1)]
+                                    z = subprocess.Popen(x, shell=True)
                             recording = True
                             rec_start = time.time()
                             return
@@ -1546,12 +1515,12 @@ def handle_btn_click(btn):
                         
                         if mode == "vda" and vda_info_data['intrinsic audio'] == True:
                             if vda_audio_mode != "muted":
-                                x = ["arecord", "-r", "48000", "-f", "S32_LE", "/home/dwlfc/Downloads/records/%s.wav" % (actions)]
-                                z = subprocess.Popen(x, shell=False)
+                                x = ["arecord -D plughw:1 -r 48000 -f S32_LE /home/dwlfc/Downloads/records/%s.wav" % (actions)]
+                                z = subprocess.Popen(x, shell=True)
                         elif mode == "vdm" and vdm_info_data['intrinsic audio'] == True:
                             if vdm_audio_mode != "muted":
-                                x = ["arecord", "-r", "48000", "-f", "S32_LE", "/home/dwlfc/Downloads/records/%s.wav" % (actions)]
-                                z = subprocess.Popen(x, shell=False)
+                                x = ["arecord -D plughw:1 -r 48000 -f S32_LE /home/dwlfc/Downloads/records/%s.wav" % (actions)]
+                                z = subprocess.Popen(x, shell=True)
                         
                         encoder = H264Encoder()
                         # we need to set this otherwise a 60 FPS videos is 2x slower, a 15 FPS, 2x faster and so on
@@ -1648,13 +1617,13 @@ def handle_btn_click(btn):
                     if recording == False:
                         recording = True
                         actions += 1
-                        x = ["arecord", "-r", "48000", "-f", "S32_LE", "/home/dwlfc/Downloads/records/%s.wav" % (actions)]
-                        z = subprocess.Popen(x, shell=False)
+                        x = ["arecord -D plughw:1 -r 48000 -f S32_LE /home/dwlfc/Downloads/records/%s.wav" % (actions)]
+                        z = subprocess.Popen(x, shell=True)
                         rec_start = time.time()
                     else:
                         recording = False
-                        x = ["killall", "arecord"]
-                        z = subprocess.Popen(x, shell=False)
+                        x = ["killall arecord"]
+                        z = subprocess.Popen(x, shell=True)
                         rec_end = time.time()
                         value = rec_end - rec_start
                         audio_recorded += value
@@ -1937,7 +1906,7 @@ for x in [btn1, btn2, btn3, btn4, btn5, btn6, btn7, btn8, btn9]:
 while True:
 
     if disable_preview or disable_preview_audio or audioing == True or settings == True:
-        frame = cv2.imread("/home/dwlfc/Downloads/black.png")
+        frame = cv2.imread("/home/luqtas/Downloads/black.png")
     elif mode in {"vda", "vdm"}:
         frame = cam.capture_array("lores")
         frame = cv2.cvtColor(frame, cv2.COLOR_YUV420p2RGB)
