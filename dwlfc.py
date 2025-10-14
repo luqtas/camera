@@ -11,8 +11,9 @@ from picamera2.encoders import H264Encoder, Quality
 from pathlib import Path
 import subprocess
 import os
+import getpass
 
-#username = os.getlogin()
+username = getpass.getuser()
 cam = Picamera2()
 
 display = False
@@ -335,11 +336,11 @@ def cam_config():
         cam.configure(video)
 
 def save():
-    with open('/home/luqtas/Downloads/fermented.pkl', 'wb') as f:
+    with open('/home/%s/Downloads/fermented.pkl' % (username), 'wb') as f:
         pickle.dump([timeout, preview_main_data, mode, modes, info, info_depth, disable_preview, disable_preview_audio, pta_data, ptm_data, tla_data, tlm_data, vda_data, vdm_data, pta_control, pta_controls, ptm_control, ptm_controls, tla_control, tla_controls, tlm_control, tlm_controls, vda_control, vda_controls, vdm_control, vdm_controls, cluster1, cluster2, pta_cluster1, pta_cluster2, ptm_cluster1, ptm_cluster2, tla_cluster1, tla_cluster2, tlm_cluster1, tlm_cluster2, vda_cluster1, vda_cluster2, vdm_cluster1, vdm_cluster2, data, fps_mode, pta_frames, pta_fxdfps, pta_info_controls, pta_info_control, pta_info_cluster1, pta_info_cluster2, ptm_frames, ptm_fxdfps, ptm_info_controls, ptm_info_control, ptm_info_cluster1, ptm_info_cluster2, tla_frames, tla_fxdfps, tla_info_controls, tla_info_control, tla_info_cluster1, tla_info_cluster2, tlm_frames, tlm_fxdfps, tlm_info_controls, tlm_info_control, tlm_info_cluster1, tlm_info_cluster2, vda_frames, vda_fxdfps, vda_info_controls, vda_info_control, vda_info_cluster1, vda_info_cluster2, vdm_frames, vdm_fxdfps, vdm_info_controls, vdm_info_control, vdm_info_cluster1, vdm_info_cluster2, pta_info_data,ptm_info_data, tla_info_data, tlm_info_data, vda_info_data, vdm_info_data, info_data, font_scale, hurry1, hurry2, hurry_timeout, btn_save, actions, shots, audio_recorded, video_recorded, vda_audio_modes, vda_audio_mode, vdm_audio_modes, vdm_audio_mode, audioing, channels, vd_dur, c1, c2, c3, c4, c5, c6, c7, c8, inf, inf_high, asr, inf_data, display, last_info, last_info_depth, last_disable_preview_audio, computing], f)
 
 def load():
-    with open('/home/luqtas/Downloads/fermented.pkl', 'rb') as f:
+    with open('/home/%s/Downloads/fermented.pkl' % (username), 'rb') as f:
         global timeout, preview_main_data, mode, modes, info, info_depth, disable_preview, disable_preview_audio, pta_data, ptm_data, tla_data, tlm_data, vda_data, vdm_data, pta_control, pta_controls, ptm_control, ptm_controls, tla_control, tla_controls, tlm_control, tlm_controls, vda_control, vda_controls, vdm_control, vdm_controls, cluster1, cluster2, pta_cluster1, pta_cluster2, ptm_cluster1, ptm_cluster2, tla_cluster1, tla_cluster2, tlm_cluster1, tlm_cluster2, vda_cluster1, vda_cluster2, vdm_cluster1, vdm_cluster2, data, fps_mode, pta_frames, pta_fxdfps, pta_info_controls, pta_info_control, pta_info_cluster1, pta_info_cluster2, ptm_frames, ptm_fxdfps, ptm_info_controls, ptm_info_control, ptm_info_cluster1, ptm_info_cluster2, tla_frames, tla_fxdfps, tla_info_controls, tla_info_control, tla_info_cluster1, tla_info_cluster2, tlm_frames, tlm_fxdfps, tlm_info_controls, tlm_info_control, tlm_info_cluster1, tlm_info_cluster2, vda_frames, vda_fxdfps, vda_info_controls, vda_info_control, vda_info_cluster1, vda_info_cluster2, vdm_frames, vdm_fxdfps, vdm_info_controls, vdm_info_control, vdm_info_cluster1, vdm_info_cluster2, pta_info_data,ptm_info_data, tla_info_data, tlm_info_data, vda_info_data, vdm_info_data, info_data, font_scale, hurry1, hurry2, hurry_timeout, btn_save, actions, shots, audio_recorded, video_recorded, vda_audio_modes, vda_audio_mode, vdm_audio_modes, vdm_audio_mode, audioing, channels, vd_dur, c1, c2, c3, c4, c5, c6, c7, c8, inf, inf_high, asr, inf_data, display, last_info, last_info_depth, last_disable_preview_audio, computing
         timeout, preview_main_data, mode, modes, info, info_depth, disable_preview, disable_preview_audio, pta_data, ptm_data, tla_data, tlm_data, vda_data, vdm_data, pta_control, pta_controls, ptm_control, ptm_controls, tla_control, tla_controls, tlm_control, tlm_controls, vda_control, vda_controls, vdm_control, vdm_controls, cluster1, cluster2, pta_cluster1, pta_cluster2, ptm_cluster1, ptm_cluster2, tla_cluster1, tla_cluster2, tlm_cluster1, tlm_cluster2, vda_cluster1, vda_cluster2, vdm_cluster1, vdm_cluster2, data, fps_mode, pta_frames, pta_fxdfps, pta_info_controls, pta_info_control, pta_info_cluster1, pta_info_cluster2, ptm_frames, ptm_fxdfps, ptm_info_controls, ptm_info_control, ptm_info_cluster1, ptm_info_cluster2, tla_frames, tla_fxdfps, tla_info_controls, tla_info_control, tla_info_cluster1, tla_info_cluster2, tlm_frames, tlm_fxdfps, tlm_info_controls, tlm_info_control, tlm_info_cluster1, tlm_info_cluster2, vda_frames, vda_fxdfps, vda_info_controls, vda_info_control, vda_info_cluster1, vda_info_cluster2, vdm_frames, vdm_fxdfps, vdm_info_controls, vdm_info_control, vdm_info_cluster1, vdm_info_cluster2, pta_info_data,ptm_info_data, tla_info_data, tlm_info_data, vda_info_data, vdm_info_data, info_data, font_scale, hurry1, hurry2, hurry_timeout, btn_save, actions, shots, audio_recorded, video_recorded, vda_audio_modes, vda_audio_mode, vdm_audio_modes, vdm_audio_mode, audioing, channels, vd_dur, c1, c2, c3, c4, c5, c6, c7, c8, inf, inf_high, asr, inf_data, display, last_info, last_info_depth, last_disable_preview_audio, computing = pickle.load(f)
 
@@ -348,13 +349,13 @@ def init():
     
     pointer = subprocess.Popen("unclutter", shell=True)
     
-    file = Path('/home/luqtas/Downloads/records')
+    file = Path('/home/%s/Downloads/records' % (username))
     if file.exists():
         pass
     else:
         os.makedirs(file)
     
-    file = Path('/home/luqtas/Downloads/fermented.pkl')
+    file = Path('/home/%s/Downloads/fermented.pkl' % (username))
     if file.exists():
         load()
     else:
@@ -1241,7 +1242,7 @@ def lapsing():
                 break
             z += 1
             buffer, metadata = cam.switch_mode_and_capture_buffers(still, ["raw"])
-            cam.helpers.save_dng(buffer[0], metadata, still["raw"], "/home/luqtas/Downloads/records/%s-%s.dng" % (actions, z))
+            cam.helpers.save_dng(buffer[0], metadata, still["raw"], "/home/%s/Downloads/records/%s-%s.dng" % (username, actions, z))
             shots += 1
             if info_data['battery saver'] == True:
                 cam.stop()
@@ -1254,7 +1255,7 @@ def lapsing():
                 break
             z += 1
             buffer, metadata = cam.switch_mode_and_capture_buffers(still, ["raw"])
-            cam.helpers.save_dng(buffer[0], metadata, still["raw"], "/home/luqtas/Downloads/records/%s-%s.dng" % (actions, z))
+            cam.helpers.save_dng(buffer[0], metadata, still["raw"], "/home/%s/Downloads/records/%s-%s.dng" % (username, actions, z))
             shots += 1
             time.sleep(info_data['interval'])
         save()
@@ -1361,7 +1362,7 @@ def handle_btn_click(btn):
                     actions += 1
                     shots += 1
                     buffer, metadata = cam.switch_mode_and_capture_buffers(still, ["raw"])
-                    cam.helpers.save_dng(buffer[0], metadata, still["raw"], "/home/luqtas/Downloads/records/%s.dng" % (actions))
+                    cam.helpers.save_dng(buffer[0], metadata, still["raw"], "/home/%s/Downloads/records/%s.dng" % (username, actions))
                     save()
                     
                 elif mode in {"tla", "tlm"}:
@@ -1397,114 +1398,114 @@ def handle_btn_click(btn):
                             if mode == "vda":
                                 if vda_audio_mode == "stereo":
                                     if channels == 2:
-                                        x = ["arecord -D plughw:1 -r 48000 -f S32_LE /home/luqtas/Downloads/records/%s-l.wav" % (actions)]
+                                        x = ["arecord -D plughw:1 -r 48000 -f S32_LE /home/%s/Downloads/records/%s-l.wav" % (username, actions)]
                                         z = subprocess.Popen(x, shell=True)
                                     elif channels == 1:
-                                        x = ["arecord -D plughw:1 -r 48000 -f S32_LE /home/luqtas/Downloads/records/%s-r.wav" % (actions)]
+                                        x = ["arecord -D plughw:1 -r 48000 -f S32_LE /home/%s/Downloads/records/%s-r.wav" % (username, actions)]
                                         z = subprocess.Popen(x, shell=True)
                                 elif vda_audio_mode == "5.1":
                                     if channels == 6:
-                                        x = ["arecord -D plughw:1 -r 48000 -f S32_LE /home/luqtas/Downloads/records/%s-sw.wav" % (actions)]
+                                        x = ["arecord -D plughw:1 -r 48000 -f S32_LE /home/%s/Downloads/records/%s-sw.wav" % (username, actions)]
                                         z = subprocess.Popen(x, shell=True)
                                     elif channels == 5:
-                                        x = ["arecord -D plughw:1 -r 48000 -f S32_LE /home/luqtas/Downloads/records/%s-ct.wav" % (actions)]
+                                        x = ["arecord -D plughw:1 -r 48000 -f S32_LE /home/%s/Downloads/records/%s-ct.wav" % (username, actions)]
                                         z = subprocess.Popen(x, shell=True)
                                     elif channels == 4:
-                                        x = ["arecord -D plughw:1 -r 48000 -f S32_LE /home/luqtas/Downloads/records/%s-fl.wav" % (actions)]
+                                        x = ["arecord -D plughw:1 -r 48000 -f S32_LE /home/%s/Downloads/records/%s-fl.wav" % (username, actions)]
                                         z = subprocess.Popen(x, shell=True)
                                     elif channels == 3:
-                                        x = ["arecord -D plughw:1 -r 48000 -f S32_LE /home/luqtas/Downloads/records/%s-fr.wav" % (actions)]
+                                        x = ["arecord -D plughw:1 -r 48000 -f S32_LE /home/%s/Downloads/records/%s-fr.wav" % (username, actions)]
                                         z = subprocess.Popen(x, shell=True)
                                     elif channels == 2:
-                                        x = ["arecord -D plughw:1 -r 48000 -f S32_LE /home/luqtas/Downloads/records/%s-rl.wav" % (actions)]
+                                        x = ["arecord -D plughw:1 -r 48000 -f S32_LE /home/%s/Downloads/records/%s-rl.wav" % (username, actions)]
                                         z = subprocess.Popen(x, shell=True)
                                     elif channels == 1:
-                                        x = ["arecord -D plughw:1 -r 48000 -f S32_LE /home/luqtas/Downloads/records/%s-rr.wav" % (actions)]
+                                        x = ["arecord -D plughw:1 -r 48000 -f S32_LE /home/%s/Downloads/records/%s-rr.wav" % (username, actions)]
                                         z = subprocess.Popen(x, shell=True)
                                 elif vda_audio_mode == "7.1":
                                     if channels == 8:
-                                        x = ["arecord -D plughw:1 -r 48000 -f S32_LE /home/luqtas/Downloads/records/%s-sw.wav" % (actions)]
+                                        x = ["arecord -D plughw:1 -r 48000 -f S32_LE /home/%s/Downloads/records/%s-sw.wav" % (username, actions)]
                                         z = subprocess.Popen(x, shell=True)
                                     elif channels == 7:
-                                        x = ["arecord -D plughw:1 -r 48000 -f S32_LE /home/luqtas/Downloads/records/%s-ct.wav" % (actions)]
+                                        x = ["arecord -D plughw:1 -r 48000 -f S32_LE /home/%s/Downloads/records/%s-ct.wav" % (username, actions)]
                                         z = subprocess.Popen(x, shell=True)
                                     elif channels == 6:
-                                        x = ["arecord -D plughw:1 -r 48000 -f S32_LE /home/luqtas/Downloads/records/%s-fl.wav" % (actions)]
+                                        x = ["arecord -D plughw:1 -r 48000 -f S32_LE /home/%s/Downloads/records/%s-fl.wav" % (username, actions)]
                                         z = subprocess.Popen(x, shell=True)
                                     elif channels == 5:
-                                        x = ["arecord -D plughw:1 -r 48000 -f S32_LE /home/luqtas/Downloads/records/%s-fr.wav" % (actions)]
+                                        x = ["arecord -D plughw:1 -r 48000 -f S32_LE /home/%s/Downloads/records/%s-fr.wav" % (username, actions)]
                                         z = subprocess.Popen(x, shell=True)
                                     elif channels == 4:
-                                        x = ["arecord -D plughw:1 -r 48000 -f S32_LE /home/luqtas/Downloads/records/%s-sl.wav" % (actions)]
+                                        x = ["arecord -D plughw:1 -r 48000 -f S32_LE /home/%s/Downloads/records/%s-sl.wav" % (username, actions)]
                                         z = subprocess.Popen(x, shell=True)
                                     elif channels == 3:
-                                        x = ["arecord -D plughw:1 -r 48000 -f S32_LE /home/luqtas/Downloads/records/%s-sr.wav" % (actions)]
+                                        x = ["arecord -D plughw:1 -r 48000 -f S32_LE /home/%s/Downloads/records/%s-sr.wav" % (username, actions)]
                                         z = subprocess.Popen(x, shell=True)
                                     elif channels == 2:
-                                        x = ["arecord -D plughw:1 -r 48000 -f S32_LE /home/luqtas/Downloads/records/%s-rl.wav" % (actions)]
+                                        x = ["arecord -D plughw:1 -r 48000 -f S32_LE /home/%s/Downloads/records/%s-rl.wav" % (username, actions)]
                                         z = subprocess.Popen(x, shell=True)
                                     elif channels == 1:
-                                        x = ["arecord -D plughw:1 -r 48000 -f S32_LE /home/luqtas/Downloads/records/%s-rr.wav" % (actions)]
+                                        x = ["arecord -D plughw:1 -r 48000 -f S32_LE /home/%s/Downloads/records/%s-rr.wav" % (username, actions)]
                                         z = subprocess.Popen(x, shell=True)
                                 elif vda_audio_mode == "inf.":
                                     # since for the logic of inf. we set channels to 10 (which we can't go lower)
                                     # we subtract - 9 for the number of the record!
-                                    x = ["arecord -D plughw:1 -r 48000 -f S32_LE /home/luqtas/Downloads/records/%s-%s.wav" % (actions, inf+1)]
+                                    x = ["arecord -D plughw:1 -r 48000 -f S32_LE /home/%s/Downloads/records/%s-%s.wav" % (username, actions, inf+1)]
                                     z = subprocess.Popen(x, shell=True)
                             elif mode == "vdm":
                                 if vdm_audio_mode == "stereo":
                                     if channels == 2:
-                                        x = ["arecord -D plughw:1 -r 48000 -f S32_LE /home/luqtas/Downloads/records/%s-l.wav" % (actions)]
+                                        x = ["arecord -D plughw:1 -r 48000 -f S32_LE /home/%s/Downloads/records/%s-l.wav" % (username, actions)]
                                         z = subprocess.Popen(x, shell=True)
                                     elif channels == 1:
-                                        x = ["arecord -D plughw:1 -r 48000 -f S32_LE /home/luqtas/Downloads/records/%s-r.wav" % (actions)]
+                                        x = ["arecord -D plughw:1 -r 48000 -f S32_LE /home/%s/Downloads/records/%s-r.wav" % (username, actions)]
                                         z = subprocess.Popen(x, shell=True)
                                 elif vdm_audio_mode == "5.1":
                                     if channels == 6:
-                                        x = ["arecord -D plughw:1 -r 48000 -f S32_LE /home/luqtas/Downloads/records/%s-sw.wav" % (actions)]
+                                        x = ["arecord -D plughw:1 -r 48000 -f S32_LE /home/%s/Downloads/records/%s-sw.wav" % (username, actions)]
                                         z = subprocess.Popen(x, shell=True)
                                     elif channels == 5:
-                                        x = ["arecord -D plughw:1 -r 48000 -f S32_LE /home/luqtas/Downloads/records/%s-ct.wav" % (actions)]
+                                        x = ["arecord -D plughw:1 -r 48000 -f S32_LE /home/%s/Downloads/records/%s-ct.wav" % (username, actions)]
                                         z = subprocess.Popen(x, shell=True)
                                     elif channels == 4:
-                                        x = ["arecord -D plughw:1 -r 48000 -f S32_LE /home/luqtas/Downloads/records/%s-fl.wav" % (actions)]
+                                        x = ["arecord -D plughw:1 -r 48000 -f S32_LE /home/%s/Downloads/records/%s-fl.wav" % (username, actions)]
                                         z = subprocess.Popen(x, shell=True)
                                     elif channels == 3:
-                                        x = ["arecord -D plughw:1 -r 48000 -f S32_LE /home/luqtas/Downloads/records/%s-fr.wav" % (actions)]
+                                        x = ["arecord -D plughw:1 -r 48000 -f S32_LE /home/%s/Downloads/records/%s-fr.wav" % (username, actions)]
                                         z = subprocess.Popen(x, shell=True)
                                     elif channels == 2:
-                                        x = ["arecord -D plughw:1 -r 48000 -f S32_LE /home/luqtas/Downloads/records/%s-rl.wav" % (actions)]
+                                        x = ["arecord -D plughw:1 -r 48000 -f S32_LE /home/%s/Downloads/records/%s-rl.wav" % (username, actions)]
                                         z = subprocess.Popen(x, shell=True)
                                     elif channels == 1:
-                                        x = ["arecord -D plughw:1 -r 48000 -f S32_LE /home/luqtas/Downloads/records/%s-rr.wav" % (actions)]
+                                        x = ["arecord -D plughw:1 -r 48000 -f S32_LE /home/%s/Downloads/records/%s-rr.wav" % (username, actions)]
                                         z = subprocess.Popen(x, shell=True)
                                 elif vdm_audio_mode == "7.1":
                                     if channels == 8:
-                                        x = ["arecord -D plughw:1 -r 48000 -f S32_LE /home/luqtas/Downloads/records/%s-sw.wav" % (actions)]
+                                        x = ["arecord -D plughw:1 -r 48000 -f S32_LE /home/%s/Downloads/records/%s-sw.wav" % (username, actions)]
                                         z = subprocess.Popen(x, shell=True)
                                     elif channels == 7:
-                                        x = ["arecord -D plughw:1 -r 48000 -f S32_LE /home/luqtas/Downloads/records/%s-ct.wav" % (actions)]
+                                        x = ["arecord -D plughw:1 -r 48000 -f S32_LE /home/%s/Downloads/records/%s-ct.wav" % (username, actions)]
                                         z = subprocess.Popen(x, shell=True)
                                     elif channels == 6:
-                                        x = ["arecord -D plughw:1 -r 48000 -f S32_LE /home/luqtas/Downloads/records/%s-fl.wav" % (actions)]
+                                        x = ["arecord -D plughw:1 -r 48000 -f S32_LE /home/%s/Downloads/records/%s-fl.wav" % (username, actions)]
                                         z = subprocess.Popen(x, shell=True)
                                     elif channels == 5:
-                                        x = ["arecord -D plughw:1 -r 48000 -f S32_LE /home/luqtas/Downloads/records/%s-fr.wav" % (actions)]
+                                        x = ["arecord -D plughw:1 -r 48000 -f S32_LE /home/%s/Downloads/records/%s-fr.wav" % (username, actions)]
                                         z = subprocess.Popen(x, shell=True)
                                     elif channels == 4:
-                                        x = ["arecord -D plughw:1 -r 48000 -f S32_LE /home/luqtas/Downloads/records/%s-sl.wav" % (actions)]
+                                        x = ["arecord -D plughw:1 -r 48000 -f S32_LE /home/%s/Downloads/records/%s-sl.wav" % (username, actions)]
                                         z = subprocess.Popen(x, shell=True)
                                     elif channels == 3:
-                                        x = ["arecord -D plughw:1 -r 48000 -f S32_LE /home/luqtas/Downloads/records/%s-sr.wav" % (actions)]
+                                        x = ["arecord -D plughw:1 -r 48000 -f S32_LE /home/%s/Downloads/records/%s-sr.wav" % (username, actions)]
                                         z = subprocess.Popen(x, shell=True)
                                     elif channels == 2:
-                                        x = ["arecord -D plughw:1 -r 48000 -f S32_LE /home/luqtas/Downloads/records/%s-rl.wav" % (actions)]
+                                        x = ["arecord -D plughw:1 -r 48000 -f S32_LE /home/%s/Downloads/records/%s-rl.wav" % (username, actions)]
                                         z = subprocess.Popen(x, shell=True)
                                     elif channels == 1:
-                                        x = ["arecord -D plughw:1 -r 48000 -f S32_LE /home/luqtas/Downloads/records/%s-rr.wav" % (actions)]
+                                        x = ["arecord -D plughw:1 -r 48000 -f S32_LE /home/%s/Downloads/records/%s-rr.wav" % (username, actions)]
                                         z = subprocess.Popen(x, shell=True)
                                 elif vdm_audio_mode == "inf.":
-                                    x = ["arecord -D plughw:1 -r 48000 -f S32_LE /home/luqtas/Downloads/records/%s-%s.wav" % (actions, inf+1)]
+                                    x = ["arecord -D plughw:1 -r 48000 -f S32_LE /home/%s/Downloads/records/%s-%s.wav" % (username, actions, inf+1)]
                                     z = subprocess.Popen(x, shell=True)
                             recording = True
                             rec_start = time.time()
@@ -1515,11 +1516,11 @@ def handle_btn_click(btn):
                         
                         if mode == "vda" and vda_info_data['intrinsic audio'] == True:
                             if vda_audio_mode != "muted":
-                                x = ["arecord -D plughw:1 -r 48000 -f S32_LE /home/luqtas/Downloads/records/%s.wav" % (actions)]
+                                x = ["arecord -D plughw:1 -r 48000 -f S32_LE /home/%s/Downloads/records/%s.wav" % (username, actions)]
                                 z = subprocess.Popen(x, shell=True)
                         elif mode == "vdm" and vdm_info_data['intrinsic audio'] == True:
                             if vdm_audio_mode != "muted":
-                                x = ["arecord -D plughw:1 -r 48000 -f S32_LE /home/luqtas/Downloads/records/%s.wav" % (actions)]
+                                x = ["arecord -D plughw:1 -r 48000 -f S32_LE /home/%s/Downloads/records/%s.wav" % (username, actions)]
                                 z = subprocess.Popen(x, shell=True)
                         
                         encoder = H264Encoder()
@@ -1527,7 +1528,7 @@ def handle_btn_click(btn):
                         # doesn't seem to solve anything
                         #encoder.frame_skip_count = 30 / fps
                         
-                        cam.start_recording(encoder, "/home/luqtas/Downloads/records/%s.h264" % (actions), quality=Quality.VERY_HIGH)
+                        cam.start_recording(encoder, "/home/%s/Downloads/records/%s.h264" % (username, actions), quality=Quality.VERY_HIGH)
                         rec_start = time.time()
                         
                     elif recording == True:
@@ -1617,7 +1618,7 @@ def handle_btn_click(btn):
                     if recording == False:
                         recording = True
                         actions += 1
-                        x = ["arecord -D plughw:1 -r 48000 -f S32_LE /home/luqtas/Downloads/records/%s.wav" % (actions)]
+                        x = ["arecord -D plughw:1 -r 48000 -f S32_LE /home/%s/Downloads/records/%s.wav" % (username, actions)]
                         z = subprocess.Popen(x, shell=True)
                         rec_start = time.time()
                     else:
@@ -1829,12 +1830,12 @@ def handle_btn_click(btn):
                     display = True
                     computing = True
                     save()
-                    zzz = subprocess.Popen("sudo /home/luqtas/Downloads/lcd.sh", shell=True)
+                    zzz = subprocess.Popen("sudo /home/%s/Downloads/lcd.sh" % (username), shell=True)
                 else:
                     display = False
                     computing = True
                     save()
-                    zzz = subprocess.Popen("sudo /home/luqtas/Downloads/hdmi.sh", shell=True)
+                    zzz = subprocess.Popen("sudo /home/%s/Downloads/hdmi.sh" % (username), shell=True)
         elif btn == btn9:
             clusterment(2, 2, "-", 9)
     
@@ -1906,7 +1907,7 @@ for x in [btn1, btn2, btn3, btn4, btn5, btn6, btn7, btn8, btn9]:
 while True:
 
     if disable_preview or disable_preview_audio or audioing == True or settings == True:
-        frame = cv2.imread("/home/luqtas/Downloads/black.png")
+        frame = cv2.imread("/home/%s/Downloads/black.png" % (username))
     elif mode in {"vda", "vdm"}:
         frame = cam.capture_array("lores")
         frame = cv2.cvtColor(frame, cv2.COLOR_YUV420p2RGB)
