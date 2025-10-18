@@ -99,6 +99,10 @@ last_info = info
 last_info_depth = info_depth
 last_disable_preview_audio = disable_preview_audio
 
+# gate to check if we need to restart the camera to update the new FPS when FPS mode is True
+last_exposure = 0
+fps_refresh = 0
+
 pta_data = {
     "AeEnable": True,
     "AeExposureMode": 0,
@@ -341,12 +345,12 @@ def cam_config():
 
 def save():
     with open('/home/%s/Downloads/fermented.pkl' % (username), 'wb') as f:
-        pickle.dump([timeout, preview_main_data, mode, modes, info, info_depth, disable_preview, disable_preview_audio, pta_data, ptm_data, tla_data, tlm_data, vda_data, vdm_data, pta_control, pta_controls, ptm_control, ptm_controls, tla_control, tla_controls, tlm_control, tlm_controls, vda_control, vda_controls, vdm_control, vdm_controls, cluster1, cluster2, pta_cluster1, pta_cluster2, ptm_cluster1, ptm_cluster2, tla_cluster1, tla_cluster2, tlm_cluster1, tlm_cluster2, vda_cluster1, vda_cluster2, vdm_cluster1, vdm_cluster2, data, fps_mode, pta_frames, pta_fxdfps, pta_info_controls, pta_info_control, pta_info_cluster1, pta_info_cluster2, ptm_frames, ptm_fxdfps, ptm_info_controls, ptm_info_control, ptm_info_cluster1, ptm_info_cluster2, tla_frames, tla_fxdfps, tla_info_controls, tla_info_control, tla_info_cluster1, tla_info_cluster2, tlm_frames, tlm_fxdfps, tlm_info_controls, tlm_info_control, tlm_info_cluster1, tlm_info_cluster2, vda_frames, vda_fxdfps, vda_info_controls, vda_info_control, vda_info_cluster1, vda_info_cluster2, vdm_frames, vdm_fxdfps, vdm_info_controls, vdm_info_control, vdm_info_cluster1, vdm_info_cluster2, pta_info_data,ptm_info_data, tla_info_data, tlm_info_data, vda_info_data, vdm_info_data, info_data, font_scale, hurry1, hurry2, hurry_timeout, btn_save, actions, shots, audio_recorded, video_recorded, vda_audio_modes, vda_audio_mode, vdm_audio_modes, vdm_audio_mode, audioing, channels, vd_dur, c1, c2, c3, c4, c5, c6, c7, c8, inf, inf_high, asr, inf_data, display, last_info, last_info_depth, last_disable_preview_audio, computing], f)
+        pickle.dump([timeout, preview_main_data, mode, modes, info, info_depth, disable_preview, disable_preview_audio, pta_data, ptm_data, tla_data, tlm_data, vda_data, vdm_data, pta_control, pta_controls, ptm_control, ptm_controls, tla_control, tla_controls, tlm_control, tlm_controls, vda_control, vda_controls, vdm_control, vdm_controls, cluster1, cluster2, pta_cluster1, pta_cluster2, ptm_cluster1, ptm_cluster2, tla_cluster1, tla_cluster2, tlm_cluster1, tlm_cluster2, vda_cluster1, vda_cluster2, vdm_cluster1, vdm_cluster2, data, fps_mode, pta_frames, pta_fxdfps, pta_info_controls, pta_info_control, pta_info_cluster1, pta_info_cluster2, ptm_frames, ptm_fxdfps, ptm_info_controls, ptm_info_control, ptm_info_cluster1, ptm_info_cluster2, tla_frames, tla_fxdfps, tla_info_controls, tla_info_control, tla_info_cluster1, tla_info_cluster2, tlm_frames, tlm_fxdfps, tlm_info_controls, tlm_info_control, tlm_info_cluster1, tlm_info_cluster2, vda_frames, vda_fxdfps, vda_info_controls, vda_info_control, vda_info_cluster1, vda_info_cluster2, vdm_frames, vdm_fxdfps, vdm_info_controls, vdm_info_control, vdm_info_cluster1, vdm_info_cluster2, pta_info_data,ptm_info_data, tla_info_data, tlm_info_data, vda_info_data, vdm_info_data, info_data, font_scale, hurry1, hurry2, hurry_timeout, btn_save, actions, shots, audio_recorded, video_recorded, vda_audio_modes, vda_audio_mode, vdm_audio_modes, vdm_audio_mode, audioing, channels, vd_dur, c1, c2, c3, c4, c5, c6, c7, c8, inf, inf_high, asr, inf_data, display, last_info, last_info_depth, last_disable_preview_audio, computing, last_exposure], f)
 
 def load():
     with open('/home/%s/Downloads/fermented.pkl' % (username), 'rb') as f:
-        global timeout, preview_main_data, mode, modes, info, info_depth, disable_preview, disable_preview_audio, pta_data, ptm_data, tla_data, tlm_data, vda_data, vdm_data, pta_control, pta_controls, ptm_control, ptm_controls, tla_control, tla_controls, tlm_control, tlm_controls, vda_control, vda_controls, vdm_control, vdm_controls, cluster1, cluster2, pta_cluster1, pta_cluster2, ptm_cluster1, ptm_cluster2, tla_cluster1, tla_cluster2, tlm_cluster1, tlm_cluster2, vda_cluster1, vda_cluster2, vdm_cluster1, vdm_cluster2, data, fps_mode, pta_frames, pta_fxdfps, pta_info_controls, pta_info_control, pta_info_cluster1, pta_info_cluster2, ptm_frames, ptm_fxdfps, ptm_info_controls, ptm_info_control, ptm_info_cluster1, ptm_info_cluster2, tla_frames, tla_fxdfps, tla_info_controls, tla_info_control, tla_info_cluster1, tla_info_cluster2, tlm_frames, tlm_fxdfps, tlm_info_controls, tlm_info_control, tlm_info_cluster1, tlm_info_cluster2, vda_frames, vda_fxdfps, vda_info_controls, vda_info_control, vda_info_cluster1, vda_info_cluster2, vdm_frames, vdm_fxdfps, vdm_info_controls, vdm_info_control, vdm_info_cluster1, vdm_info_cluster2, pta_info_data,ptm_info_data, tla_info_data, tlm_info_data, vda_info_data, vdm_info_data, info_data, font_scale, hurry1, hurry2, hurry_timeout, btn_save, actions, shots, audio_recorded, video_recorded, vda_audio_modes, vda_audio_mode, vdm_audio_modes, vdm_audio_mode, audioing, channels, vd_dur, c1, c2, c3, c4, c5, c6, c7, c8, inf, inf_high, asr, inf_data, display, last_info, last_info_depth, last_disable_preview_audio, computing
-        timeout, preview_main_data, mode, modes, info, info_depth, disable_preview, disable_preview_audio, pta_data, ptm_data, tla_data, tlm_data, vda_data, vdm_data, pta_control, pta_controls, ptm_control, ptm_controls, tla_control, tla_controls, tlm_control, tlm_controls, vda_control, vda_controls, vdm_control, vdm_controls, cluster1, cluster2, pta_cluster1, pta_cluster2, ptm_cluster1, ptm_cluster2, tla_cluster1, tla_cluster2, tlm_cluster1, tlm_cluster2, vda_cluster1, vda_cluster2, vdm_cluster1, vdm_cluster2, data, fps_mode, pta_frames, pta_fxdfps, pta_info_controls, pta_info_control, pta_info_cluster1, pta_info_cluster2, ptm_frames, ptm_fxdfps, ptm_info_controls, ptm_info_control, ptm_info_cluster1, ptm_info_cluster2, tla_frames, tla_fxdfps, tla_info_controls, tla_info_control, tla_info_cluster1, tla_info_cluster2, tlm_frames, tlm_fxdfps, tlm_info_controls, tlm_info_control, tlm_info_cluster1, tlm_info_cluster2, vda_frames, vda_fxdfps, vda_info_controls, vda_info_control, vda_info_cluster1, vda_info_cluster2, vdm_frames, vdm_fxdfps, vdm_info_controls, vdm_info_control, vdm_info_cluster1, vdm_info_cluster2, pta_info_data,ptm_info_data, tla_info_data, tlm_info_data, vda_info_data, vdm_info_data, info_data, font_scale, hurry1, hurry2, hurry_timeout, btn_save, actions, shots, audio_recorded, video_recorded, vda_audio_modes, vda_audio_mode, vdm_audio_modes, vdm_audio_mode, audioing, channels, vd_dur, c1, c2, c3, c4, c5, c6, c7, c8, inf, inf_high, asr, inf_data, display, last_info, last_info_depth, last_disable_preview_audio, computing = pickle.load(f)
+        global timeout, preview_main_data, mode, modes, info, info_depth, disable_preview, disable_preview_audio, pta_data, ptm_data, tla_data, tlm_data, vda_data, vdm_data, pta_control, pta_controls, ptm_control, ptm_controls, tla_control, tla_controls, tlm_control, tlm_controls, vda_control, vda_controls, vdm_control, vdm_controls, cluster1, cluster2, pta_cluster1, pta_cluster2, ptm_cluster1, ptm_cluster2, tla_cluster1, tla_cluster2, tlm_cluster1, tlm_cluster2, vda_cluster1, vda_cluster2, vdm_cluster1, vdm_cluster2, data, fps_mode, pta_frames, pta_fxdfps, pta_info_controls, pta_info_control, pta_info_cluster1, pta_info_cluster2, ptm_frames, ptm_fxdfps, ptm_info_controls, ptm_info_control, ptm_info_cluster1, ptm_info_cluster2, tla_frames, tla_fxdfps, tla_info_controls, tla_info_control, tla_info_cluster1, tla_info_cluster2, tlm_frames, tlm_fxdfps, tlm_info_controls, tlm_info_control, tlm_info_cluster1, tlm_info_cluster2, vda_frames, vda_fxdfps, vda_info_controls, vda_info_control, vda_info_cluster1, vda_info_cluster2, vdm_frames, vdm_fxdfps, vdm_info_controls, vdm_info_control, vdm_info_cluster1, vdm_info_cluster2, pta_info_data,ptm_info_data, tla_info_data, tlm_info_data, vda_info_data, vdm_info_data, info_data, font_scale, hurry1, hurry2, hurry_timeout, btn_save, actions, shots, audio_recorded, video_recorded, vda_audio_modes, vda_audio_mode, vdm_audio_modes, vdm_audio_mode, audioing, channels, vd_dur, c1, c2, c3, c4, c5, c6, c7, c8, inf, inf_high, asr, inf_data, display, last_info, last_info_depth, last_disable_preview_audio, computing, last_exposure
+        timeout, preview_main_data, mode, modes, info, info_depth, disable_preview, disable_preview_audio, pta_data, ptm_data, tla_data, tlm_data, vda_data, vdm_data, pta_control, pta_controls, ptm_control, ptm_controls, tla_control, tla_controls, tlm_control, tlm_controls, vda_control, vda_controls, vdm_control, vdm_controls, cluster1, cluster2, pta_cluster1, pta_cluster2, ptm_cluster1, ptm_cluster2, tla_cluster1, tla_cluster2, tlm_cluster1, tlm_cluster2, vda_cluster1, vda_cluster2, vdm_cluster1, vdm_cluster2, data, fps_mode, pta_frames, pta_fxdfps, pta_info_controls, pta_info_control, pta_info_cluster1, pta_info_cluster2, ptm_frames, ptm_fxdfps, ptm_info_controls, ptm_info_control, ptm_info_cluster1, ptm_info_cluster2, tla_frames, tla_fxdfps, tla_info_controls, tla_info_control, tla_info_cluster1, tla_info_cluster2, tlm_frames, tlm_fxdfps, tlm_info_controls, tlm_info_control, tlm_info_cluster1, tlm_info_cluster2, vda_frames, vda_fxdfps, vda_info_controls, vda_info_control, vda_info_cluster1, vda_info_cluster2, vdm_frames, vdm_fxdfps, vdm_info_controls, vdm_info_control, vdm_info_cluster1, vdm_info_cluster2, pta_info_data,ptm_info_data, tla_info_data, tlm_info_data, vda_info_data, vdm_info_data, info_data, font_scale, hurry1, hurry2, hurry_timeout, btn_save, actions, shots, audio_recorded, video_recorded, vda_audio_modes, vda_audio_mode, vdm_audio_modes, vdm_audio_mode, audioing, channels, vd_dur, c1, c2, c3, c4, c5, c6, c7, c8, inf, inf_high, asr, inf_data, display, last_info, last_info_depth, last_disable_preview_audio, computing, last_exposure = pickle.load(f)
 
 def init():
     global cluster1, cluster2, data, computing, info
@@ -595,7 +599,7 @@ def cluster_cycle(cluster):
 def clusterment(cluster, click, ment, btn):
 # we either increment or decrement values here!
 # cluster is from each cluster, click to check if it's hold/single/double/+, ment checks if it's a decrement or increment action
-    global pta_data, ptm_data, tla_data, tlm_data, vda_data, vdm_data, data, fps_mode, fps, pta_frames, pta_fxdfps, ptm_frames, ptm_fxdfps, tla_frames, tla_fxdfps, tlm_frames, tlm_fxdfps, vda_frames, vda_fxdfps, vdm_frames, vdm_fxdfps, pta_info_data,ptm_info_data, tla_info_data, tlm_info_data, vda_info_data, vdm_info_data, info_data, font_scale, timeout, btnx, hurry, hurry_lock, hurry1, hurry2, hurry_start, hurry_timeout, btn_save, vda_audio_modes, vda_audio_mode, vdm_audio_modes, vdm_audio_mode, channels, inf, inf_high, asr, hurrx
+    global pta_data, ptm_data, tla_data, tlm_data, vda_data, vdm_data, data, fps_mode, fps, pta_frames, pta_fxdfps, ptm_frames, ptm_fxdfps, tla_frames, tla_fxdfps, tlm_frames, tlm_fxdfps, vda_frames, vda_fxdfps, vdm_frames, vdm_fxdfps, pta_info_data,ptm_info_data, tla_info_data, tlm_info_data, vda_info_data, vdm_info_data, info_data, font_scale, timeout, btnx, hurry, hurry_lock, hurry1, hurry2, hurry_start, hurry_timeout, btn_save, vda_audio_modes, vda_audio_mode, vdm_audio_modes, vdm_audio_mode, channels, inf, inf_high, asr, hurrx, last_exposure
     
     # "inf." should invert values...
     if audioing == True and cluster == 1:
@@ -895,7 +899,10 @@ def clusterment(cluster, click, ment, btn):
             result = minimum
         # sets the control + value
         cam.set_controls({cluster: result})
-        
+
+        if mode in {"ptm", "tlm", "vdm"} and cluster == 'ExposureTime':
+            last_exposure = data['ExposureTime']
+
         # we need to update the data into the presistent variables...
         data[cluster] = result
         if mode == "pta":
@@ -1276,7 +1283,7 @@ def lapsing():
         recording = False
 
 def handle_btn_click(btn):
-    global btn_timeout, btn_count, mode, modes, info, info_depth, disable_preview, disable_preview_audio, cluster1, cluster2, data, fps_mode, info_data, hurry_lock, btn_save_times, recording, actions, shots, audio_recorded, video_recorded, rec_start, last_info_depth, last_info, last_disable_preview_audio, audioing, channels, vd_dur, c1, c2, c3, c4, c5, c6, c7, c8, inf, inf_high, inf_data, timelapse, display, computing, settings
+    global btn_timeout, btn_count, mode, modes, info, info_depth, disable_preview, disable_preview_audio, cluster1, cluster2, data, fps_mode, info_data, hurry_lock, btn_save_times, recording, actions, shots, audio_recorded, video_recorded, rec_start, last_info_depth, last_info, last_disable_preview_audio, audioing, channels, vd_dur, c1, c2, c3, c4, c5, c6, c7, c8, inf, inf_high, inf_data, timelapse, display, computing, settings, last_exposure
     # OLD LOGIC WAS USING THESE AS GLOBAL VARIABLES (will just let them commented here in case i missed something)
     # pta_data, ptm_data, tla_data, tlm_data, vda_data, vdm_data, pta_control, pta_controls, ptm_control, ptm_controls, tla_control, tla_controls, tlm_control, tlm_controls, vda_control, vda_controls, vdm_control, vdm_controls
     btn_timeout = None
@@ -1673,6 +1680,7 @@ def handle_btn_click(btn):
                 cam.set_controls(ptm_data)
                 data = ptm_data
                 info_data = ptm_info_data
+                last_exposure = data['ExposureTime']
                 cam_config()
                 if info_depth == 0:
                     cluster1 = ptm_cluster1
@@ -1695,6 +1703,7 @@ def handle_btn_click(btn):
                 cam.set_controls(tlm_data)
                 data = tlm_data
                 info_data = tlm_info_data
+                last_exposure = data['ExposureTime']
                 cam_config()
                 if info_depth == 0:
                     cluster1 = tlm_cluster1
@@ -1717,6 +1726,7 @@ def handle_btn_click(btn):
                 cam.set_controls(vdm_data)
                 data = vdm_data
                 info_data = vdm_info_data
+                last_exposure = data['ExposureTime']
                 cam_config()
                 if info_depth == 0:
                     cluster1 = vdm_cluster1
@@ -1935,6 +1945,14 @@ while True:
     # draws a black background when "disabling" the camera preview
     #if disable_preview or disable_preview_audio == True:
     #    cv2.rectangle(frame, (0, 0), (320, 240), (0, 0, 0), -1)
+    
+    if info_data['FPS mode'] == True and data['ExposureTime'] != last_exposure:
+        fps_refresh += 1
+        if fps_refresh >= 350:
+            fps_refresh = 0
+            last_exposure = data['ExposureTime']
+            fps_config(1)
+            print("foos")
     
     # information!
     if info == True and disable_preview == False:
