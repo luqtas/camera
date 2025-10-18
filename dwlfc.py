@@ -83,6 +83,7 @@ btnx = None
 hurry = 0
 hurry1 = 3
 hurry2 = 6
+hurrx = "o"
 
 # define modes and set it to pta (phtoto, automatic) initially
 modes = cycle(["pta", "ptm", "tla", "tlm", "vda", "vdm", "ado"])
@@ -126,6 +127,7 @@ pta_info_cluster1 = pta_info_control
 pta_info_cluster2 = next(pta_info_controls)
 #
 ptm_data = {
+    "AeEnable": False,
     "AnalogueGain": 1.0,
     "ExposureTime": 1000,
     "AwbEnable": True,
@@ -177,6 +179,7 @@ tla_info_cluster1 = tla_info_control
 tla_info_cluster2 = next(tla_info_controls)
 #
 tlm_data = {
+    "AeEnable": False,
     "AnalogueGain": 1.0,
     "ExposureTime": 1000,
     "AwbEnable": True,
@@ -219,7 +222,7 @@ vda_controls = cycle(["AeExposureMode", "AeConstraintMode", "AeMeteringMode", "E
 vda_control = next(vda_controls)
 vda_cluster1 = vda_control
 vda_cluster2 = next(vda_controls)
-vda_frames = cycle([30, 55, 0.25, 0.5, 0.75, 1, 3, 5, 15, 24])
+vda_frames = cycle([30, 60, 0.25, 0.5, 0.75, 1, 3, 5, 15, 24])
 vda_fxdfps = next(vda_frames)
 vda_info_controls = cycle(["fixed FPS", "audio mode", "intrinsic audio", "audio safe range", "font size", "button timeout", "hurry timeout", "hurry 1", "hurry 2", "save frequency"])
 vda_audio_modes = cycle(["mono", "stereo", "5.1", "7.1", "inf.", "muted"])
@@ -230,6 +233,7 @@ vda_info_cluster1 = vda_info_control
 vda_info_cluster2 = next(vda_info_controls)
 #
 vdm_data = {
+    "AeEnable": False,
     "AnalogueGain": 1.0,
     "ExposureTime": 1000,
     "AwbEnable": True,
@@ -245,7 +249,7 @@ vdm_controls = cycle(["AnalogueGain", "ExposureTime", "AwbEnable", "AwbMode", "B
 vdm_control = next(vdm_controls)
 vdm_cluster1 = vdm_control
 vdm_cluster2 = next(vdm_controls)
-vdm_frames = cycle([30, 55, 0.25, 0.5, 0.75, 1, 3, 5, 15, 24])
+vdm_frames = cycle([30, 60, 0.25, 0.5, 0.75, 1, 3, 5, 15, 24])
 vdm_fxdfps = next(vdm_frames)
 vdm_info_controls = cycle(["FPS mode", "fixed FPS", "audio mode", "intrinsic audio", "audio safe range", "font size", "button timeout", "hurry timeout", "hurry 1", "hurry 2", "save frequency"])
 vdm_audio_modes = cycle(["mono", "stereo", "5.1", "7.1", "inf.", "muted"])
@@ -439,11 +443,7 @@ def init():
     
     # without starting camera again on manual modes, we can't set ExposureTime!
     # feels like a bug?
-    if mode in {"ptm", "tlm"}:
-        cam.stop()
-        cam_config()
-        cam.start()
-    elif mode == "vdm":
+    if mode in {"ptm", "tlm", "vdm"}:
         cam.stop()
         cam_config()
         cam.start()
@@ -595,7 +595,7 @@ def cluster_cycle(cluster):
 def clusterment(cluster, click, ment, btn):
 # we either increment or decrement values here!
 # cluster is from each cluster, click to check if it's hold/single/double/+, ment checks if it's a decrement or increment action
-    global pta_data, ptm_data, tla_data, tlm_data, vda_data, vdm_data, data, fps_mode, fps, pta_frames, pta_fxdfps, ptm_frames, ptm_fxdfps, tla_frames, tla_fxdfps, tlm_frames, tlm_fxdfps, vda_frames, vda_fxdfps, vdm_frames, vdm_fxdfps, pta_info_data,ptm_info_data, tla_info_data, tlm_info_data, vda_info_data, vdm_info_data, info_data, font_scale, timeout, btnx, hurry, hurry_lock, hurry1, hurry2, hurry_start, hurry_timeout, btn_save, vda_audio_modes, vda_audio_mode, vdm_audio_modes, vdm_audio_mode, channels, inf, inf_high, asr
+    global pta_data, ptm_data, tla_data, tlm_data, vda_data, vdm_data, data, fps_mode, fps, pta_frames, pta_fxdfps, ptm_frames, ptm_fxdfps, tla_frames, tla_fxdfps, tlm_frames, tlm_fxdfps, vda_frames, vda_fxdfps, vdm_frames, vdm_fxdfps, pta_info_data,ptm_info_data, tla_info_data, tlm_info_data, vda_info_data, vdm_info_data, info_data, font_scale, timeout, btnx, hurry, hurry_lock, hurry1, hurry2, hurry_start, hurry_timeout, btn_save, vda_audio_modes, vda_audio_mode, vdm_audio_modes, vdm_audio_mode, channels, inf, inf_high, asr, hurrx
     
     # "inf." should invert values...
     if audioing == True and cluster == 1:
@@ -691,19 +691,21 @@ def clusterment(cluster, click, ment, btn):
     # in a hurry logic
     # where we check for multiple, same button presses to activate a multiplication of + or - on value
     if hurry_lock == True:
-        hurry_end = time.time()
-        hurry_lenght = hurry_end - hurry_start
-        if hurry_lenght < hurry_timeout:
-            if btnx == btn:
-                hurry += 1
-                hurry_start = time.time()
-        else:
-            hurry = 0
-            hurry_lock = False
+        if hurrx == ment:
+            hurry_end = time.time()
+            hurry_lenght = hurry_end - hurry_start
+            if hurry_lenght < hurry_timeout:
+                if btnx == btn:
+                    hurry += 1
+                    hurry_start = time.time()
+            else:
+                hurry = 0
+                hurry_lock = False
     else:
         hurry = 0
         btnx = btn
         hurry_lock = True
+        hurrx = ment
         hurry_start = time.time()
     
     if info_depth == 0:
@@ -723,7 +725,9 @@ def clusterment(cluster, click, ment, btn):
             
         if cluster == "AnalogueGain":
             # maybe we can have a logic of "if user repeats too much click 2 or 3, value increases drastically"
-            if click == 0:
+            if ment == "o":
+                value = 1 - data[cluster]
+            elif click == 0:
                 value = 0.1
             elif click == 1:
                 value = 0.5
@@ -735,10 +739,12 @@ def clusterment(cluster, click, ment, btn):
         elif cluster == "ExposureTime":
             # for the global shutter, min.: 29 and max.: 15534385
             if click == 0:
-                if ment == "+":
-                    value = 2000 - data[cluster]
-                if ment == "-":
-                    value = 125 - data[cluster]
+                if ment == "o":
+                    value = 1000 - data[cluster]
+                elif ment == "+":
+                    value = data[cluster] // 4
+                elif ment == "-":
+                    value = data[cluster] // 6
                     ment = "skip"
             elif click == 1:
                 if ment == "+":
@@ -760,7 +766,7 @@ def clusterment(cluster, click, ment, btn):
             value = 1
             
         elif cluster == "AwbMode":
-            if click == 0:
+            if ment == "o":
                 value = 0 - data[cluster]
             elif click == 1:
                 value = 1
@@ -770,7 +776,7 @@ def clusterment(cluster, click, ment, btn):
                 value = 3
                 
         elif cluster == "AeExposureMode":
-            if click == 0:
+            if ment == "o":
                 value = 0 - data[cluster]
             elif click == 1:
                 value = 1
@@ -780,7 +786,7 @@ def clusterment(cluster, click, ment, btn):
                 value = 3
             
         elif cluster == "AeConstraintMode":
-            if click == 0:
+            if ment == "o":
                 value = 0 - data[cluster]
             elif click == 1:
                 value = 1
@@ -790,7 +796,7 @@ def clusterment(cluster, click, ment, btn):
                 value = 3
             
         elif cluster == "AeMeteringMode":
-            if click == 0:
+            if ment == "o":
                 value = 0 - data[cluster]
             elif click == 1:
                 value = 1
@@ -800,7 +806,9 @@ def clusterment(cluster, click, ment, btn):
                 value = 3
             
         elif cluster == "ExposureValue":
-            if click == 0:
+            if ment == "o":
+                value = 0 - data[cluster]
+            elif click == 0:
                 value = 0.25
             elif click == 1:
                 value = 0.5
@@ -810,7 +818,9 @@ def clusterment(cluster, click, ment, btn):
                 value = 5
             
         elif cluster == "Brightness":
-            if click == 0:
+            if ment == "o":
+                value = 0 - data[cluster]
+            elif click == 0:
                 value = 0.05
             elif click == 1:
                 value = 0.1
@@ -820,7 +830,9 @@ def clusterment(cluster, click, ment, btn):
                 value = 0.5
             
         elif cluster == "Contrast":
-            if click == 0:
+            if ment == "o":
+                value = 1 - data[cluster]
+            elif click == 0:
                 value = 0.125
             elif click == 1:
                 value = 0.25
@@ -830,7 +842,9 @@ def clusterment(cluster, click, ment, btn):
                 value = 1
             
         elif cluster == "Sharpness":
-            if click == 0:
+            if ment == "o":
+                value = 1 - data[cluster]
+            elif click == 0:
                 value = 0.1
             elif click == 1:
                 value = 0.25
@@ -840,7 +854,9 @@ def clusterment(cluster, click, ment, btn):
                 value = 1
             
         elif cluster == "Saturation":
-            if click == 0:
+            if ment == "o":
+                value = 1 - data[cluster]
+            elif click == 0:
                 value = 0.125
             elif click == 1:
                 value = 0.25
@@ -850,7 +866,7 @@ def clusterment(cluster, click, ment, btn):
                 value = 1
             
         elif cluster == "NoiseReductionMode":
-            if click == 0:
+            if ment == "o":
                 value = 0 - data[cluster]
             elif click == 1:
                 value = 1
@@ -946,12 +962,10 @@ def clusterment(cluster, click, ment, btn):
                     fps = next(fxdfps)
                     info_data['fixed FPS'] = fps
                 elif ment == "-":
-                    # now i realized that a simple int for cycling through a dict/array
-                    # would be a better solution than itertools! but ess muss sein
-                    for i in range(3):
-                        # we cycle 3 times as the previous value is 4 positions "ahead"
+                    for i in range(8):
+                        # we cycle 8 times as the previous value is 10 positions "ahead"
                         next(fxdfps)
-                    # the 4th time
+                    # the 9° time
                     fps = next(fxdfps)
                     info_data['fixed FPS'] = fps
                 fps_config(1)
@@ -1278,7 +1292,7 @@ def handle_btn_click(btn):
     if computing == True:
         return
     
-    if btn in {btn2, btn4, btn5, btn6, btn7, btn8, btn9} and disable_preview == True:
+    if btn in {btn2, btn3, btn4, btn5, btn6, btn7, btn8, btn9} and disable_preview == True:
         btn_count = 0
         return
     
@@ -1326,7 +1340,7 @@ def handle_btn_click(btn):
         if btn == btn4:
             clusterment(1, 0, "+", 4)
         if btn == btn5:
-            pass
+            clusterment(1, 0, "o", 5)
         if btn == btn6:
             clusterment(1, 0, "-", 6)
         
@@ -1334,8 +1348,10 @@ def handle_btn_click(btn):
         if btn == btn7:
             clusterment(2, 0, "+", 7)
         if btn == btn8:
-        # this is the button we shutdown the Pi!
-            if settings == True:
+            if settings == False:
+                clusterment(2, 0, "o", 8)
+            # this is the button we shutdown the Pi!
+            elif settings == True:
                 computing = True
                 save()
                 zzz = subprocess.Popen("sudo shutdown -h now", shell=True)
@@ -1721,9 +1737,10 @@ def handle_btn_click(btn):
             # i was somehow getting a bug where i couldn't change ExposureTime or AnalogGain
             # and to fix that i had to re-start the camera again when changing to a manual mode
             # it seems to work without it now, who knows why
-            ##cam.stop()
-            ##cam_config()
-            ##cam.start()
+            # sometimes we also don't have automatic modes doing their automatic thing!
+            cam.stop()
+            cam_config()
+            cam.start()
             
             # we reset the zoom as stuff gets messed when we reach video mode with lores preview...
             #cam.controls.ScalerCrop = (0, 0, 1450, 1088)
