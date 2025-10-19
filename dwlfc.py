@@ -1952,7 +1952,6 @@ while True:
             fps_refresh = 0
             last_exposure = data['ExposureTime']
             fps_config(1)
-            print("foos")
     
     # information!
     if info == True and disable_preview == False:
