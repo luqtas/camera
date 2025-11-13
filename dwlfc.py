@@ -122,7 +122,7 @@ pta_controls = cycle(["AeExposureMode", "AeConstraintMode", "AeMeteringMode", "E
 pta_control = next(pta_controls)
 pta_cluster1 = pta_control
 pta_cluster2 = next(pta_controls)
-pta_frames = cycle([30, 60, 0.25, 0.5, 0.75, 1, 3, 5, 15, 24])
+pta_frames = cycle([30, 50, 0.25, 0.5, 0.75, 1, 3, 5, 15, 24])
 pta_fxdfps = next(pta_frames)
 pta_info_controls = cycle(["fixed FPS", "font size", "button timeout", "hurry timeout", "hurry 1", "hurry 2", "save frequency"])
 pta_info_data = {"FPS mode": False, "fixed FPS": pta_fxdfps, "font size": font_scale, "button timeout": timeout, "hurry timeout": hurry_timeout, "hurry 1": hurry1, "hurry 2": hurry2, "save frequency": btn_save}
@@ -147,7 +147,7 @@ ptm_controls = cycle(["AnalogueGain", "ExposureTime", "AwbEnable", "AwbMode", "B
 ptm_control = next(ptm_controls)
 ptm_cluster1 = ptm_control
 ptm_cluster2 = next(ptm_controls)
-ptm_frames = cycle([30, 60, 0.25, 0.5, 0.75, 1, 3, 5, 15, 24])
+ptm_frames = cycle([30, 50, 0.25, 0.5, 0.75, 1, 3, 5, 15, 24])
 ptm_fxdfps = next(ptm_frames)
 ptm_info_controls = cycle(["FPS mode", "fixed FPS", "font size", "button timeout", "hurry timeout", "hurry 1", "hurry 2", "save frequency"])
 ptm_info_data = {"FPS mode": fps_mode, "fixed FPS": pta_fxdfps, "font size": font_scale, "button timeout": timeout, "hurry timeout": hurry_timeout, "hurry 1": hurry1, "hurry 2": hurry2, "save frequency": btn_save}
@@ -174,7 +174,7 @@ tla_controls = cycle(["AeExposureMode", "AeConstraintMode", "AeMeteringMode", "E
 tla_control = next(tla_controls)
 tla_cluster1 = tla_control
 tla_cluster2 = next(tla_controls)
-tla_frames = cycle([30, 60, 0.25, 0.5, 0.75, 1, 3, 5, 15, 24])
+tla_frames = cycle([30, 50, 0.25, 0.5, 0.75, 1, 3, 5, 15, 24])
 tla_fxdfps = next(tla_frames)
 tla_info_controls = cycle(["interval", "shots", "battery saver", "fixed FPS", "font size", "button timeout", "hurry timeout", "hurry 1", "hurry 2", "save frequency"])
 tla_info_data = {"interval": 10, "shots": 0, "battery saver": False, "FPS mode": False, "fixed FPS": pta_fxdfps, "font size": font_scale, "button timeout": timeout, "hurry timeout": hurry_timeout, "hurry 1": hurry1, "hurry 2": hurry2, "save frequency": btn_save}
@@ -199,7 +199,7 @@ tlm_controls = cycle(["AnalogueGain", "ExposureTime", "AwbEnable", "AwbMode", "B
 tlm_control = next(tlm_controls)
 tlm_cluster1 = tlm_control
 tlm_cluster2 = next(tlm_controls)
-tlm_frames = cycle([30, 60, 0.25, 0.5, 0.75, 1, 3, 5, 15, 24])
+tlm_frames = cycle([30, 50, 0.25, 0.5, 0.75, 1, 3, 5, 15, 24])
 tlm_fxdfps = next(tlm_frames)
 tlm_info_controls = cycle(["interval", "shots", "battery saver", "FPS mode", "fixed FPS", "font size", "button timeout", "hurry timeout", "hurry 1", "hurry 2", "save frequency"])
 tlm_info_data = {"interval": 10, "shots": 0, "battery saver": False, "FPS mode": fps_mode, "fixed FPS": pta_fxdfps, "font size": font_scale, "button timeout": timeout, "hurry timeout": hurry_timeout, "hurry 1": hurry1, "hurry 2": hurry2, "save frequency": btn_save}
@@ -226,7 +226,7 @@ vda_controls = cycle(["AeExposureMode", "AeConstraintMode", "AeMeteringMode", "E
 vda_control = next(vda_controls)
 vda_cluster1 = vda_control
 vda_cluster2 = next(vda_controls)
-vda_frames = cycle([30, 60, 0.25, 0.5, 0.75, 1, 3, 5, 15, 24])
+vda_frames = cycle([30, 50, 0.25, 0.5, 0.75, 1, 3, 5, 15, 24])
 vda_fxdfps = next(vda_frames)
 vda_info_controls = cycle(["fixed FPS", "audio mode", "intrinsic audio", "audio safe range", "font size", "button timeout", "hurry timeout", "hurry 1", "hurry 2", "save frequency"])
 vda_audio_modes = cycle(["mono", "stereo", "5.1", "7.1", "inf.", "muted"])
@@ -253,7 +253,7 @@ vdm_controls = cycle(["AnalogueGain", "ExposureTime", "AwbEnable", "AwbMode", "B
 vdm_control = next(vdm_controls)
 vdm_cluster1 = vdm_control
 vdm_cluster2 = next(vdm_controls)
-vdm_frames = cycle([30, 60, 0.25, 0.5, 0.75, 1, 3, 5, 15, 24])
+vdm_frames = cycle([30, 50, 0.25, 0.5, 0.75, 1, 3, 5, 15, 24])
 vdm_fxdfps = next(vdm_frames)
 vdm_info_controls = cycle(["FPS mode", "fixed FPS", "audio mode", "intrinsic audio", "audio safe range", "font size", "button timeout", "hurry timeout", "hurry 1", "hurry 2", "save frequency"])
 vdm_audio_modes = cycle(["mono", "stereo", "5.1", "7.1", "inf.", "muted"])
@@ -302,6 +302,8 @@ def fps_config(reboot):
         frame = data['ExposureTime']
         # 1 second in microseconds 1000000
         fps = 1000000 / frame
+        if fps >= 50:
+            fps = 50
     
     if reboot == 1:
         cam.stop()
@@ -345,12 +347,12 @@ def cam_config():
 
 def save():
     with open('/home/%s/Downloads/fermented.pkl' % (username), 'wb') as f:
-        pickle.dump([timeout, preview_main_data, mode, modes, info, info_depth, disable_preview, disable_preview_audio, pta_data, ptm_data, tla_data, tlm_data, vda_data, vdm_data, pta_control, pta_controls, ptm_control, ptm_controls, tla_control, tla_controls, tlm_control, tlm_controls, vda_control, vda_controls, vdm_control, vdm_controls, cluster1, cluster2, pta_cluster1, pta_cluster2, ptm_cluster1, ptm_cluster2, tla_cluster1, tla_cluster2, tlm_cluster1, tlm_cluster2, vda_cluster1, vda_cluster2, vdm_cluster1, vdm_cluster2, data, fps_mode, pta_frames, pta_fxdfps, pta_info_controls, pta_info_control, pta_info_cluster1, pta_info_cluster2, ptm_frames, ptm_fxdfps, ptm_info_controls, ptm_info_control, ptm_info_cluster1, ptm_info_cluster2, tla_frames, tla_fxdfps, tla_info_controls, tla_info_control, tla_info_cluster1, tla_info_cluster2, tlm_frames, tlm_fxdfps, tlm_info_controls, tlm_info_control, tlm_info_cluster1, tlm_info_cluster2, vda_frames, vda_fxdfps, vda_info_controls, vda_info_control, vda_info_cluster1, vda_info_cluster2, vdm_frames, vdm_fxdfps, vdm_info_controls, vdm_info_control, vdm_info_cluster1, vdm_info_cluster2, pta_info_data,ptm_info_data, tla_info_data, tlm_info_data, vda_info_data, vdm_info_data, info_data, font_scale, hurry1, hurry2, hurry_timeout, btn_save, actions, shots, audio_recorded, video_recorded, vda_audio_modes, vda_audio_mode, vdm_audio_modes, vdm_audio_mode, audioing, channels, vd_dur, c1, c2, c3, c4, c5, c6, c7, c8, inf, inf_high, asr, inf_data, display, last_info, last_info_depth, last_disable_preview_audio, computing, last_exposure], f)
+        pickle.dump([shots, audio_recorded, video_recorded, timeout, preview_main_data, mode, modes, info, info_depth, disable_preview, disable_preview_audio, pta_data, ptm_data, tla_data, tlm_data, vda_data, vdm_data, pta_control, pta_controls, ptm_control, ptm_controls, tla_control, tla_controls, tlm_control, tlm_controls, vda_control, vda_controls, vdm_control, vdm_controls, cluster1, cluster2, pta_cluster1, pta_cluster2, ptm_cluster1, ptm_cluster2, tla_cluster1, tla_cluster2, tlm_cluster1, tlm_cluster2, vda_cluster1, vda_cluster2, vdm_cluster1, vdm_cluster2, data, fps_mode, pta_frames, pta_fxdfps, pta_info_controls, pta_info_control, pta_info_cluster1, pta_info_cluster2, ptm_frames, ptm_fxdfps, ptm_info_controls, ptm_info_control, ptm_info_cluster1, ptm_info_cluster2, tla_frames, tla_fxdfps, tla_info_controls, tla_info_control, tla_info_cluster1, tla_info_cluster2, tlm_frames, tlm_fxdfps, tlm_info_controls, tlm_info_control, tlm_info_cluster1, tlm_info_cluster2, vda_frames, vda_fxdfps, vda_info_controls, vda_info_control, vda_info_cluster1, vda_info_cluster2, vdm_frames, vdm_fxdfps, vdm_info_controls, vdm_info_control, vdm_info_cluster1, vdm_info_cluster2, pta_info_data,ptm_info_data, tla_info_data, tlm_info_data, vda_info_data, vdm_info_data, info_data, font_scale, hurry1, hurry2, hurry_timeout, btn_save, actions, vda_audio_modes, vda_audio_mode, vdm_audio_modes, vdm_audio_mode, audioing, channels, vd_dur, c1, c2, c3, c4, c5, c6, c7, c8, inf, inf_high, asr, inf_data, display, last_info, last_info_depth, last_disable_preview_audio, computing, last_exposure], f)
 
 def load():
     with open('/home/%s/Downloads/fermented.pkl' % (username), 'rb') as f:
-        global timeout, preview_main_data, mode, modes, info, info_depth, disable_preview, disable_preview_audio, pta_data, ptm_data, tla_data, tlm_data, vda_data, vdm_data, pta_control, pta_controls, ptm_control, ptm_controls, tla_control, tla_controls, tlm_control, tlm_controls, vda_control, vda_controls, vdm_control, vdm_controls, cluster1, cluster2, pta_cluster1, pta_cluster2, ptm_cluster1, ptm_cluster2, tla_cluster1, tla_cluster2, tlm_cluster1, tlm_cluster2, vda_cluster1, vda_cluster2, vdm_cluster1, vdm_cluster2, data, fps_mode, pta_frames, pta_fxdfps, pta_info_controls, pta_info_control, pta_info_cluster1, pta_info_cluster2, ptm_frames, ptm_fxdfps, ptm_info_controls, ptm_info_control, ptm_info_cluster1, ptm_info_cluster2, tla_frames, tla_fxdfps, tla_info_controls, tla_info_control, tla_info_cluster1, tla_info_cluster2, tlm_frames, tlm_fxdfps, tlm_info_controls, tlm_info_control, tlm_info_cluster1, tlm_info_cluster2, vda_frames, vda_fxdfps, vda_info_controls, vda_info_control, vda_info_cluster1, vda_info_cluster2, vdm_frames, vdm_fxdfps, vdm_info_controls, vdm_info_control, vdm_info_cluster1, vdm_info_cluster2, pta_info_data,ptm_info_data, tla_info_data, tlm_info_data, vda_info_data, vdm_info_data, info_data, font_scale, hurry1, hurry2, hurry_timeout, btn_save, actions, shots, audio_recorded, video_recorded, vda_audio_modes, vda_audio_mode, vdm_audio_modes, vdm_audio_mode, audioing, channels, vd_dur, c1, c2, c3, c4, c5, c6, c7, c8, inf, inf_high, asr, inf_data, display, last_info, last_info_depth, last_disable_preview_audio, computing, last_exposure
-        timeout, preview_main_data, mode, modes, info, info_depth, disable_preview, disable_preview_audio, pta_data, ptm_data, tla_data, tlm_data, vda_data, vdm_data, pta_control, pta_controls, ptm_control, ptm_controls, tla_control, tla_controls, tlm_control, tlm_controls, vda_control, vda_controls, vdm_control, vdm_controls, cluster1, cluster2, pta_cluster1, pta_cluster2, ptm_cluster1, ptm_cluster2, tla_cluster1, tla_cluster2, tlm_cluster1, tlm_cluster2, vda_cluster1, vda_cluster2, vdm_cluster1, vdm_cluster2, data, fps_mode, pta_frames, pta_fxdfps, pta_info_controls, pta_info_control, pta_info_cluster1, pta_info_cluster2, ptm_frames, ptm_fxdfps, ptm_info_controls, ptm_info_control, ptm_info_cluster1, ptm_info_cluster2, tla_frames, tla_fxdfps, tla_info_controls, tla_info_control, tla_info_cluster1, tla_info_cluster2, tlm_frames, tlm_fxdfps, tlm_info_controls, tlm_info_control, tlm_info_cluster1, tlm_info_cluster2, vda_frames, vda_fxdfps, vda_info_controls, vda_info_control, vda_info_cluster1, vda_info_cluster2, vdm_frames, vdm_fxdfps, vdm_info_controls, vdm_info_control, vdm_info_cluster1, vdm_info_cluster2, pta_info_data,ptm_info_data, tla_info_data, tlm_info_data, vda_info_data, vdm_info_data, info_data, font_scale, hurry1, hurry2, hurry_timeout, btn_save, actions, shots, audio_recorded, video_recorded, vda_audio_modes, vda_audio_mode, vdm_audio_modes, vdm_audio_mode, audioing, channels, vd_dur, c1, c2, c3, c4, c5, c6, c7, c8, inf, inf_high, asr, inf_data, display, last_info, last_info_depth, last_disable_preview_audio, computing, last_exposure = pickle.load(f)
+        global shots, audio_recorded, video_recorded, timeout, preview_main_data, mode, modes, info, info_depth, disable_preview, disable_preview_audio, pta_data, ptm_data, tla_data, tlm_data, vda_data, vdm_data, pta_control, pta_controls, ptm_control, ptm_controls, tla_control, tla_controls, tlm_control, tlm_controls, vda_control, vda_controls, vdm_control, vdm_controls, cluster1, cluster2, pta_cluster1, pta_cluster2, ptm_cluster1, ptm_cluster2, tla_cluster1, tla_cluster2, tlm_cluster1, tlm_cluster2, vda_cluster1, vda_cluster2, vdm_cluster1, vdm_cluster2, data, fps_mode, pta_frames, pta_fxdfps, pta_info_controls, pta_info_control, pta_info_cluster1, pta_info_cluster2, ptm_frames, ptm_fxdfps, ptm_info_controls, ptm_info_control, ptm_info_cluster1, ptm_info_cluster2, tla_frames, tla_fxdfps, tla_info_controls, tla_info_control, tla_info_cluster1, tla_info_cluster2, tlm_frames, tlm_fxdfps, tlm_info_controls, tlm_info_control, tlm_info_cluster1, tlm_info_cluster2, vda_frames, vda_fxdfps, vda_info_controls, vda_info_control, vda_info_cluster1, vda_info_cluster2, vdm_frames, vdm_fxdfps, vdm_info_controls, vdm_info_control, vdm_info_cluster1, vdm_info_cluster2, pta_info_data,ptm_info_data, tla_info_data, tlm_info_data, vda_info_data, vdm_info_data, info_data, font_scale, hurry1, hurry2, hurry_timeout, btn_save, actions, vda_audio_modes, vda_audio_mode, vdm_audio_modes, vdm_audio_mode, audioing, channels, vd_dur, c1, c2, c3, c4, c5, c6, c7, c8, inf, inf_high, asr, inf_data, display, last_info, last_info_depth, last_disable_preview_audio, computing, last_exposure
+        shots, audio_recorded, video_recorded, timeout, preview_main_data, mode, modes, info, info_depth, disable_preview, disable_preview_audio, pta_data, ptm_data, tla_data, tlm_data, vda_data, vdm_data, pta_control, pta_controls, ptm_control, ptm_controls, tla_control, tla_controls, tlm_control, tlm_controls, vda_control, vda_controls, vdm_control, vdm_controls, cluster1, cluster2, pta_cluster1, pta_cluster2, ptm_cluster1, ptm_cluster2, tla_cluster1, tla_cluster2, tlm_cluster1, tlm_cluster2, vda_cluster1, vda_cluster2, vdm_cluster1, vdm_cluster2, data, fps_mode, pta_frames, pta_fxdfps, pta_info_controls, pta_info_control, pta_info_cluster1, pta_info_cluster2, ptm_frames, ptm_fxdfps, ptm_info_controls, ptm_info_control, ptm_info_cluster1, ptm_info_cluster2, tla_frames, tla_fxdfps, tla_info_controls, tla_info_control, tla_info_cluster1, tla_info_cluster2, tlm_frames, tlm_fxdfps, tlm_info_controls, tlm_info_control, tlm_info_cluster1, tlm_info_cluster2, vda_frames, vda_fxdfps, vda_info_controls, vda_info_control, vda_info_cluster1, vda_info_cluster2, vdm_frames, vdm_fxdfps, vdm_info_controls, vdm_info_control, vdm_info_cluster1, vdm_info_cluster2, pta_info_data,ptm_info_data, tla_info_data, tlm_info_data, vda_info_data, vdm_info_data, info_data, font_scale, hurry1, hurry2, hurry_timeout, btn_save, actions, vda_audio_modes, vda_audio_mode, vdm_audio_modes, vdm_audio_mode, audioing, channels, vd_dur, c1, c2, c3, c4, c5, c6, c7, c8, inf, inf_high, asr, inf_data, display, last_info, last_info_depth, last_disable_preview_audio, computing, last_exposure = pickle.load(f)
 
 def init():
     global cluster1, cluster2, data, computing, info
@@ -748,13 +750,13 @@ def clusterment(cluster, click, ment, btn):
                 elif ment == "+":
                     value = data[cluster] // 4
                 elif ment == "-":
-                    value = data[cluster] // 6
-                    ment = "skip"
+                    value = data[cluster] // 5
+                    #ment = "skip"
             elif click == 1:
                 if ment == "+":
                     value = data[cluster] // 2
                 elif ment == "-":
-                    value = data[cluster] // 4
+                    value = data[cluster] // 3
             elif click == 2:
                 if ment == "+":
                     value = data[cluster]
@@ -764,7 +766,7 @@ def clusterment(cluster, click, ment, btn):
                 if ment == "+":
                     value = data[cluster] * 2
                 elif ment == "-":
-                    value = data[cluster] // 3
+                    value = data[cluster]
                     
         elif cluster == "AwbEnable":
             value = 1
@@ -1608,6 +1610,10 @@ def handle_btn_click(btn):
                         rec_end = time.time()
                         vd_dur = rec_end - rec_start
                         video_recorded += vd_dur
+
+                        # TODO
+                        # gotta add a "audio_recorded" track if we have "intrisic audio == true"
+                        # as well account for audio_recorded time when we are in +mono/stereo/etc. modes
                         
                         # audio_safe_range
                         vd_dur += asr
@@ -1948,10 +1954,11 @@ while True:
     
     if info_data['FPS mode'] == True and data['ExposureTime'] != last_exposure:
         fps_refresh += 1
-        if fps_refresh >= 350:
+        if fps_refresh >= 125:
             fps_refresh = 0
             last_exposure = data['ExposureTime']
             fps_config(1)
+            print("foos")
     
     # information!
     if info == True and disable_preview == False:
