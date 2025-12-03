@@ -41,10 +41,10 @@ inf_data = {"0": 0}
 inf_high = 0
 asr = 1.5
 
-actions = 0
-shots = 0
-audio_recorded = 0
-video_recorded = 0
+actions = 873
+shots = 860
+video_recorded = 2881
+audio_recorded = 205
 
 timelapse = False
 
@@ -122,7 +122,7 @@ pta_controls = cycle(["AeExposureMode", "AeConstraintMode", "AeMeteringMode", "E
 pta_control = next(pta_controls)
 pta_cluster1 = pta_control
 pta_cluster2 = next(pta_controls)
-pta_frames = cycle([30, 50, 0.25, 0.5, 0.75, 1, 3, 5, 15, 24])
+pta_frames = cycle([30, 42, 0.25, 0.5, 0.75, 1, 3, 5, 15, 24])
 pta_fxdfps = next(pta_frames)
 pta_info_controls = cycle(["fixed FPS", "font size", "button timeout", "hurry timeout", "hurry 1", "hurry 2", "save frequency"])
 pta_info_data = {"FPS mode": False, "fixed FPS": pta_fxdfps, "font size": font_scale, "button timeout": timeout, "hurry timeout": hurry_timeout, "hurry 1": hurry1, "hurry 2": hurry2, "save frequency": btn_save}
@@ -147,7 +147,7 @@ ptm_controls = cycle(["AnalogueGain", "ExposureTime", "AwbEnable", "AwbMode", "B
 ptm_control = next(ptm_controls)
 ptm_cluster1 = ptm_control
 ptm_cluster2 = next(ptm_controls)
-ptm_frames = cycle([30, 50, 0.25, 0.5, 0.75, 1, 3, 5, 15, 24])
+ptm_frames = cycle([30, 42, 0.25, 0.5, 0.75, 1, 3, 5, 15, 24])
 ptm_fxdfps = next(ptm_frames)
 ptm_info_controls = cycle(["FPS mode", "fixed FPS", "font size", "button timeout", "hurry timeout", "hurry 1", "hurry 2", "save frequency"])
 ptm_info_data = {"FPS mode": fps_mode, "fixed FPS": pta_fxdfps, "font size": font_scale, "button timeout": timeout, "hurry timeout": hurry_timeout, "hurry 1": hurry1, "hurry 2": hurry2, "save frequency": btn_save}
@@ -174,7 +174,7 @@ tla_controls = cycle(["AeExposureMode", "AeConstraintMode", "AeMeteringMode", "E
 tla_control = next(tla_controls)
 tla_cluster1 = tla_control
 tla_cluster2 = next(tla_controls)
-tla_frames = cycle([30, 50, 0.25, 0.5, 0.75, 1, 3, 5, 15, 24])
+tla_frames = cycle([30, 42, 0.25, 0.5, 0.75, 1, 3, 5, 15, 24])
 tla_fxdfps = next(tla_frames)
 tla_info_controls = cycle(["interval", "shots", "battery saver", "fixed FPS", "font size", "button timeout", "hurry timeout", "hurry 1", "hurry 2", "save frequency"])
 tla_info_data = {"interval": 10, "shots": 0, "battery saver": False, "FPS mode": False, "fixed FPS": pta_fxdfps, "font size": font_scale, "button timeout": timeout, "hurry timeout": hurry_timeout, "hurry 1": hurry1, "hurry 2": hurry2, "save frequency": btn_save}
@@ -199,7 +199,7 @@ tlm_controls = cycle(["AnalogueGain", "ExposureTime", "AwbEnable", "AwbMode", "B
 tlm_control = next(tlm_controls)
 tlm_cluster1 = tlm_control
 tlm_cluster2 = next(tlm_controls)
-tlm_frames = cycle([30, 50, 0.25, 0.5, 0.75, 1, 3, 5, 15, 24])
+tlm_frames = cycle([30, 42, 0.25, 0.5, 0.75, 1, 3, 5, 15, 24])
 tlm_fxdfps = next(tlm_frames)
 tlm_info_controls = cycle(["interval", "shots", "battery saver", "FPS mode", "fixed FPS", "font size", "button timeout", "hurry timeout", "hurry 1", "hurry 2", "save frequency"])
 tlm_info_data = {"interval": 10, "shots": 0, "battery saver": False, "FPS mode": fps_mode, "fixed FPS": pta_fxdfps, "font size": font_scale, "button timeout": timeout, "hurry timeout": hurry_timeout, "hurry 1": hurry1, "hurry 2": hurry2, "save frequency": btn_save}
@@ -226,7 +226,7 @@ vda_controls = cycle(["AeExposureMode", "AeConstraintMode", "AeMeteringMode", "E
 vda_control = next(vda_controls)
 vda_cluster1 = vda_control
 vda_cluster2 = next(vda_controls)
-vda_frames = cycle([30, 50, 0.25, 0.5, 0.75, 1, 3, 5, 15, 24])
+vda_frames = cycle([30, 42, 0.25, 0.5, 0.75, 1, 3, 5, 15, 24])
 vda_fxdfps = next(vda_frames)
 vda_info_controls = cycle(["fixed FPS", "audio mode", "intrinsic audio", "audio safe range", "font size", "button timeout", "hurry timeout", "hurry 1", "hurry 2", "save frequency"])
 vda_audio_modes = cycle(["mono", "stereo", "5.1", "7.1", "inf.", "muted"])
@@ -253,7 +253,7 @@ vdm_controls = cycle(["AnalogueGain", "ExposureTime", "AwbEnable", "AwbMode", "B
 vdm_control = next(vdm_controls)
 vdm_cluster1 = vdm_control
 vdm_cluster2 = next(vdm_controls)
-vdm_frames = cycle([30, 50, 0.25, 0.5, 0.75, 1, 3, 5, 15, 24])
+vdm_frames = cycle([30, 42, 0.25, 0.5, 0.75, 1, 3, 5, 15, 24])
 vdm_fxdfps = next(vdm_frames)
 vdm_info_controls = cycle(["FPS mode", "fixed FPS", "audio mode", "intrinsic audio", "audio safe range", "font size", "button timeout", "hurry timeout", "hurry 1", "hurry 2", "save frequency"])
 vdm_audio_modes = cycle(["mono", "stereo", "5.1", "7.1", "inf.", "muted"])
@@ -1549,11 +1549,10 @@ def handle_btn_click(btn):
                                 z = subprocess.Popen(x, shell=True)
                         
                         encoder = H264Encoder()
-                        # we need to set this otherwise a 60 FPS videos is 2x slower, a 15 FPS, 2x faster and so on
-                        # doesn't seem to solve anything
-                        #encoder.frame_skip_count = 30 / fps
                         
-                        cam.start_recording(encoder, "/home/%s/Downloads/records/%s.h264" % (username, actions), quality=Quality.VERY_HIGH)
+                        #encoder.frame_skip_count = 0
+                        
+                        cam.start_recording(encoder, "/home/%s/Downloads/records/%s.h264" % (username, actions), quality=Quality.HIGH)
                         rec_start = time.time()
                         
                     elif recording == True:
