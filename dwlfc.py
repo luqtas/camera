@@ -103,6 +103,9 @@ last_disable_preview_audio = disable_preview_audio
 last_exposure = 0
 fps_refresh = 0
 
+# in case we are shaking
+timer = 0
+
 pta_data = {
     "AeEnable": True,
     "AeExposureMode": 0,
@@ -124,8 +127,8 @@ pta_cluster1 = pta_control
 pta_cluster2 = next(pta_controls)
 pta_frames = cycle([30, 42, 0.25, 0.5, 0.75, 1, 3, 5, 15, 24])
 pta_fxdfps = next(pta_frames)
-pta_info_controls = cycle(["fixed FPS", "font size", "button timeout", "hurry timeout", "hurry 1", "hurry 2", "save frequency"])
-pta_info_data = {"FPS mode": False, "fixed FPS": pta_fxdfps, "font size": font_scale, "button timeout": timeout, "hurry timeout": hurry_timeout, "hurry 1": hurry1, "hurry 2": hurry2, "save frequency": btn_save}
+pta_info_controls = cycle(["timer", "fixed FPS", "font size", "button timeout", "hurry timeout", "hurry 1", "hurry 2", "save frequency"])
+pta_info_data = {"timer": timer, "FPS mode": False, "fixed FPS": pta_fxdfps, "font size": font_scale, "button timeout": timeout, "hurry timeout": hurry_timeout, "hurry 1": hurry1, "hurry 2": hurry2, "save frequency": btn_save}
 pta_info_control = next(pta_info_controls)
 pta_info_cluster1 = pta_info_control
 pta_info_cluster2 = next(pta_info_controls)
@@ -149,8 +152,8 @@ ptm_cluster1 = ptm_control
 ptm_cluster2 = next(ptm_controls)
 ptm_frames = cycle([30, 42, 0.25, 0.5, 0.75, 1, 3, 5, 15, 24])
 ptm_fxdfps = next(ptm_frames)
-ptm_info_controls = cycle(["FPS mode", "fixed FPS", "font size", "button timeout", "hurry timeout", "hurry 1", "hurry 2", "save frequency"])
-ptm_info_data = {"FPS mode": fps_mode, "fixed FPS": pta_fxdfps, "font size": font_scale, "button timeout": timeout, "hurry timeout": hurry_timeout, "hurry 1": hurry1, "hurry 2": hurry2, "save frequency": btn_save}
+ptm_info_controls = cycle(["timer", "FPS mode", "fixed FPS", "font size", "button timeout", "hurry timeout", "hurry 1", "hurry 2", "save frequency"])
+ptm_info_data = {"timer": timer, "FPS mode": fps_mode, "fixed FPS": pta_fxdfps, "font size": font_scale, "button timeout": timeout, "hurry timeout": hurry_timeout, "hurry 1": hurry1, "hurry 2": hurry2, "save frequency": btn_save}
 ptm_info_control = next(ptm_info_controls)
 ptm_info_cluster1 = ptm_info_control
 ptm_info_cluster2 = next(ptm_info_controls)
@@ -176,8 +179,8 @@ tla_cluster1 = tla_control
 tla_cluster2 = next(tla_controls)
 tla_frames = cycle([30, 42, 0.25, 0.5, 0.75, 1, 3, 5, 15, 24])
 tla_fxdfps = next(tla_frames)
-tla_info_controls = cycle(["interval", "shots", "battery saver", "fixed FPS", "font size", "button timeout", "hurry timeout", "hurry 1", "hurry 2", "save frequency"])
-tla_info_data = {"interval": 10, "shots": 0, "battery saver": False, "FPS mode": False, "fixed FPS": pta_fxdfps, "font size": font_scale, "button timeout": timeout, "hurry timeout": hurry_timeout, "hurry 1": hurry1, "hurry 2": hurry2, "save frequency": btn_save}
+tla_info_controls = cycle(["timer", "interval", "shots", "battery saver", "fixed FPS", "font size", "button timeout", "hurry timeout", "hurry 1", "hurry 2", "save frequency"])
+tla_info_data = {"timer": timer, "interval": 10, "shots": 0, "battery saver": False, "FPS mode": False, "fixed FPS": pta_fxdfps, "font size": font_scale, "button timeout": timeout, "hurry timeout": hurry_timeout, "hurry 1": hurry1, "hurry 2": hurry2, "save frequency": btn_save}
 tla_info_control = next(tla_info_controls)
 tla_info_cluster1 = tla_info_control
 tla_info_cluster2 = next(tla_info_controls)
@@ -201,8 +204,8 @@ tlm_cluster1 = tlm_control
 tlm_cluster2 = next(tlm_controls)
 tlm_frames = cycle([30, 42, 0.25, 0.5, 0.75, 1, 3, 5, 15, 24])
 tlm_fxdfps = next(tlm_frames)
-tlm_info_controls = cycle(["interval", "shots", "battery saver", "FPS mode", "fixed FPS", "font size", "button timeout", "hurry timeout", "hurry 1", "hurry 2", "save frequency"])
-tlm_info_data = {"interval": 10, "shots": 0, "battery saver": False, "FPS mode": fps_mode, "fixed FPS": pta_fxdfps, "font size": font_scale, "button timeout": timeout, "hurry timeout": hurry_timeout, "hurry 1": hurry1, "hurry 2": hurry2, "save frequency": btn_save}
+tlm_info_controls = cycle(["timer", "interval", "shots", "battery saver", "FPS mode", "fixed FPS", "font size", "button timeout", "hurry timeout", "hurry 1", "hurry 2", "save frequency"])
+tlm_info_data = {"timer": timer, "interval": 10, "shots": 0, "battery saver": False, "FPS mode": fps_mode, "fixed FPS": pta_fxdfps, "font size": font_scale, "button timeout": timeout, "hurry timeout": hurry_timeout, "hurry 1": hurry1, "hurry 2": hurry2, "save frequency": btn_save}
 tlm_info_control = next(tlm_info_controls)
 tlm_info_cluster1 = tlm_info_control
 tlm_info_cluster2 = next(tlm_info_controls)
@@ -228,10 +231,10 @@ vda_cluster1 = vda_control
 vda_cluster2 = next(vda_controls)
 vda_frames = cycle([30, 42, 0.25, 0.5, 0.75, 1, 3, 5, 15, 24])
 vda_fxdfps = next(vda_frames)
-vda_info_controls = cycle(["fixed FPS", "audio mode", "intrinsic audio", "audio safe range", "font size", "button timeout", "hurry timeout", "hurry 1", "hurry 2", "save frequency"])
+vda_info_controls = cycle(["timer", "fixed FPS", "audio mode", "intrinsic audio", "audio safe range", "font size", "button timeout", "hurry timeout", "hurry 1", "hurry 2", "save frequency"])
 vda_audio_modes = cycle(["mono", "stereo", "5.1", "7.1", "inf.", "muted"])
 vda_audio_mode = next(vda_audio_modes)
-vda_info_data = {"FPS mode": False, "fixed FPS": pta_fxdfps, "audio mode": vda_audio_mode, "intrinsic audio": True, "audio safe range": asr, "font size": font_scale, "button timeout": timeout, "hurry timeout": hurry_timeout, "hurry 1": hurry1, "hurry 2": hurry2, "save frequency": btn_save}
+vda_info_data = {"timer": timer, "FPS mode": False, "fixed FPS": pta_fxdfps, "audio mode": vda_audio_mode, "intrinsic audio": True, "audio safe range": asr, "font size": font_scale, "button timeout": timeout, "hurry timeout": hurry_timeout, "hurry 1": hurry1, "hurry 2": hurry2, "save frequency": btn_save}
 vda_info_control = next(vda_info_controls)
 vda_info_cluster1 = vda_info_control
 vda_info_cluster2 = next(vda_info_controls)
@@ -255,11 +258,11 @@ vdm_cluster1 = vdm_control
 vdm_cluster2 = next(vdm_controls)
 vdm_frames = cycle([30, 42, 0.25, 0.5, 0.75, 1, 3, 5, 15, 24])
 vdm_fxdfps = next(vdm_frames)
-vdm_info_controls = cycle(["FPS mode", "fixed FPS", "audio mode", "intrinsic audio", "audio safe range", "font size", "button timeout", "hurry timeout", "hurry 1", "hurry 2", "save frequency"])
+vdm_info_controls = cycle(["timer", "FPS mode", "fixed FPS", "audio mode", "intrinsic audio", "audio safe range", "font size", "button timeout", "hurry timeout", "hurry 1", "hurry 2", "save frequency"])
 vdm_audio_modes = cycle(["mono", "stereo", "5.1", "7.1", "inf.", "muted"])
 vdm_audio_mode = next(vdm_audio_modes)
 vdm_intrinsic_audio = True
-vdm_info_data = {"FPS mode": fps_mode, "fixed FPS": pta_fxdfps, "audio mode": vdm_audio_mode, "intrinsic audio": True, "audio safe range": asr, "font size": font_scale, "button timeout": timeout, "hurry timeout": hurry_timeout, "hurry 1": hurry1, "hurry 2": hurry2, "save frequency": btn_save}
+vdm_info_data = {"timer": timer, "FPS mode": fps_mode, "fixed FPS": pta_fxdfps, "audio mode": vdm_audio_mode, "intrinsic audio": True, "audio safe range": asr, "font size": font_scale, "button timeout": timeout, "hurry timeout": hurry_timeout, "hurry 1": hurry1, "hurry 2": hurry2, "save frequency": btn_save}
 vdm_info_control = next(vdm_info_controls)
 vdm_info_cluster1 = vdm_info_control
 vdm_info_cluster2 = next(vdm_info_controls)
@@ -944,11 +947,33 @@ def clusterment(cluster, click, ment, btn):
             info_data = vdm_info_data
             audio_mode = vdm_audio_mode
             audio_modes = vdm_audio_modes
-        
+
+
         # different from controls at info_depth == 0
         # here we need to set each variable beyond the dictionary update
         # as we don't have a set_controls()...
-        if cluster == "FPS mode":
+        
+        if cluster == "timer":
+            if click == 0:
+                timer = 0
+            elif click == 1:
+                if ment == "+":
+                    timer = timer + 1
+                elif ment == "-":
+                    timer = timer - 1
+            elif click == 2:
+                if ment == "+":
+                    timer = timer + 2
+                elif ment == "-":
+                    timer = timer - 2
+            elif click == 3:
+                if ment == "+":
+                    timer = timer + 3
+                elif ment == "-":
+                    timer = timer - 3
+            info_data['timer'] = timer
+        
+        elif cluster == "FPS mode":
         # note that we only have the + button doing its function!
         # the - button is reserved to trigger fps_config() if
         # the mode is activated!
@@ -1380,6 +1405,8 @@ def handle_btn_click(btn):
                 btn_count = 0
                 save()
                 return
+
+            time.sleep(info_data["timer"])
             
             if disable_preview == False:
                 
