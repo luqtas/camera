@@ -41,10 +41,10 @@ inf_data = {"0": 0}
 inf_high = 0
 asr = 1.5
 
-actions = 873
-shots = 860
-video_recorded = 2881
-audio_recorded = 205
+actions = 1431
+shots = 1380
+video_recorded = 6093
+audio_recorded = 450
 
 timelapse = False
 
@@ -604,7 +604,7 @@ def cluster_cycle(cluster):
 def clusterment(cluster, click, ment, btn):
 # we either increment or decrement values here!
 # cluster is from each cluster, click to check if it's hold/single/double/+, ment checks if it's a decrement or increment action
-    global pta_data, ptm_data, tla_data, tlm_data, vda_data, vdm_data, data, fps_mode, fps, pta_frames, pta_fxdfps, ptm_frames, ptm_fxdfps, tla_frames, tla_fxdfps, tlm_frames, tlm_fxdfps, vda_frames, vda_fxdfps, vdm_frames, vdm_fxdfps, pta_info_data,ptm_info_data, tla_info_data, tlm_info_data, vda_info_data, vdm_info_data, info_data, font_scale, timeout, btnx, hurry, hurry_lock, hurry1, hurry2, hurry_start, hurry_timeout, btn_save, vda_audio_modes, vda_audio_mode, vdm_audio_modes, vdm_audio_mode, channels, inf, inf_high, asr, hurrx, last_exposure
+    global pta_data, ptm_data, tla_data, tlm_data, vda_data, vdm_data, data, fps_mode, fps, pta_frames, pta_fxdfps, ptm_frames, ptm_fxdfps, tla_frames, tla_fxdfps, tlm_frames, tlm_fxdfps, vda_frames, vda_fxdfps, vdm_frames, vdm_fxdfps, pta_info_data,ptm_info_data, tla_info_data, tlm_info_data, vda_info_data, vdm_info_data, info_data, font_scale, timeout, btnx, hurry, hurry_lock, hurry1, hurry2, hurry_start, hurry_timeout, btn_save, vda_audio_modes, vda_audio_mode, vdm_audio_modes, vdm_audio_mode, channels, inf, inf_high, asr, hurrx, last_exposure, timer
     
     # "inf." should invert values...
     if audioing == True and cluster == 1:
