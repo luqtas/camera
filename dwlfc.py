@@ -1405,10 +1405,11 @@ def handle_btn_click(btn):
                 btn_count = 0
                 save()
                 return
-
-            time.sleep(info_data["timer"])
             
             if disable_preview == False:
+
+                if recording == False or mode != "ado":
+                    time.sleep(info_data["timer"])
                 
                 if mode in {"pta", "ptm"}:
                     actions += 1
