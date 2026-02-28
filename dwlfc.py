@@ -1408,7 +1408,7 @@ def handle_btn_click(btn):
             
             if disable_preview == False:
 
-                if recording == False or mode != "ado":
+                if recording == False and mode != "ado":
                     time.sleep(info_data["timer"])
                 
                 if mode in {"pta", "ptm"}:
