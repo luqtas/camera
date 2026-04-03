@@ -1,6 +1,9 @@
 # camera
 a digital waist-level finder camera with Pi's Global Shutter!
 
+# TODO
+    - gotta separate photos, videos and audio-only in different folders!
+
 # wiring
 screen,
 PIN 2 - 5V

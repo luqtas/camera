@@ -336,17 +336,17 @@ def cam_config():
         elif mode == "ado":
             fps = 30
         
+    data["FrameRate"] = fps
     if mode in {"pta", "ptm", "tla", "tlm", "ado"}:
-        #preview_still = cam.create_preview_configuration(main= preview_main_data, controls= {"FrameRate": fps})
-        #still = cam.create_still_configuration(raw={})
-        still = cam.create_preview_configuration(main= preview_main_data, raw={}, controls= {"FrameRate": fps})
+        #still = cam.create_preview_configuration(main= preview_main_data, raw={}, controls= {"FrameRate": fps})
+        still = cam.create_still_configuration(lores= {"size": (320, 240), "format": "YUV420"})
         cam.configure(still)
-        #cam.configure(preview_still)
-    elif mode in {"vda", "vdm"}:
-        video = cam.create_video_configuration(main= {"size": (1450, 1088), "format": "RGB888"}, lores= {"size": (320, 240), "format": "YUV420"}, controls= {"FrameRate": fps})
-        #video = cam.create_video_configuration(main= {"size": (1400, 1080)}, lores= {"size": (300, 250), "format": "YUV420"}, controls= {"FrameRate": fps}, encode= "lores")
-        #cam.configure(video)
+    elif mode in {"vda", "vd?m"}:
+        #video = cam.create_video_configuration(main= {"size": (1450, 1088), "format": "RGB888"}, lores= {"size": (320, 240), "format": "YUV420"}, controls= {"FrameRate": fps})
+        video = cam.create_video_configuration(lores= {"size": (320, 240), "format": "YUV420"})
         cam.configure(video)
+    
+    cam.set_controls(data)
 
 def save():
     with open('/home/%s/Downloads/fermented.pkl' % (username), 'wb') as f:
@@ -895,6 +895,10 @@ def clusterment(cluster, click, ment, btn):
         
         # compute!
         result = data[cluster] + value
+        
+        # if Saturation is equal 0, we get an error and no shot is registered
+        if cluster == "Saturation" and result <= 0.075:
+            result = 0.00001
         
         # there are limits!
         minimum, maximum, default = cam.camera_controls[cluster]
@@ -1968,12 +1972,15 @@ while True:
 
     if disable_preview or disable_preview_audio or audioing == True or settings == True:
         frame = cv2.imread("/home/%s/Downloads/black.png" % (username))
-    elif mode in {"vda", "vdm"}:
-        frame = cam.capture_array("lores")
-        frame = cv2.cvtColor(frame, cv2.COLOR_YUV420p2RGB)
+        
+    frame = cam.capture_array("lores")
+    frame = cv2.cvtColor(frame, cv2.COLOR_YUV420p2RGB)
+    #elif mode in {"vda", "vdm"}:
+        #frame = cam.capture_array("lores")
+        #frame = cv2.cvtColor(frame, cv2.COLOR_YUV420p2RGB)
         #frame = frame[:240, :320] # an example of how we crop stuff from the frame... we would need this if we weren't transforming YUV to RGB
-    else:
-        frame = cam.capture_array()
+    #else:
+        #frame = cam.capture_array()
     
     # draws a black background when "disabling" the camera preview
     #if disable_preview or disable_preview_audio == True:
