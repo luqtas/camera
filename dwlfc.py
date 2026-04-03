@@ -346,7 +346,8 @@ def cam_config():
         video = cam.create_video_configuration(lores= {"size": (320, 240), "format": "YUV420"})
         cam.configure(video)
     
-    cam.set_controls(data)
+    if mode in {"pta", "ptm", "tla", "tlm", "vda", "vdm"}:
+        cam.set_controls(data)
 
 def save():
     with open('/home/%s/Downloads/fermented.pkl' % (username), 'wb') as f:
@@ -1703,7 +1704,6 @@ def handle_btn_click(btn):
             mode = next(modes)
             
             if mode == "pta":
-                cam.set_controls(pta_data)
                 data = pta_data
                 info_data = pta_info_data
                 cam_config()
@@ -1714,7 +1714,6 @@ def handle_btn_click(btn):
                     cluster1 = pta_info_cluster1
                     cluster2 = pta_info_cluster2
             elif mode == "ptm":
-                cam.set_controls(ptm_data)
                 data = ptm_data
                 info_data = ptm_info_data
                 last_exposure = data['ExposureTime']
@@ -1726,7 +1725,6 @@ def handle_btn_click(btn):
                     cluster1 = ptm_info_cluster1
                     cluster2 = ptm_info_cluster2
             elif mode == "tla":
-                cam.set_controls(tla_data)
                 data = tla_data
                 info_data = tla_info_data
                 cam_config()
@@ -1737,7 +1735,6 @@ def handle_btn_click(btn):
                     cluster1 = tla_info_cluster1
                     cluster2 = tla_info_cluster2
             elif mode == "tlm":
-                cam.set_controls(tlm_data)
                 data = tlm_data
                 info_data = tlm_info_data
                 last_exposure = data['ExposureTime']
@@ -1749,7 +1746,6 @@ def handle_btn_click(btn):
                     cluster1 = tlm_info_cluster1
                     cluster2 = tlm_info_cluster2
             elif mode == "vda":
-                cam.set_controls(vda_data)
                 data = vda_data
                 info_data = vda_info_data
                 cam_config()
@@ -1760,7 +1756,6 @@ def handle_btn_click(btn):
                     cluster1 = vda_info_cluster1
                     cluster2 = vda_info_cluster2
             elif mode == "vdm":
-                cam.set_controls(vdm_data)
                 data = vdm_data
                 info_data = vdm_info_data
                 last_exposure = data['ExposureTime']
@@ -1972,9 +1967,10 @@ while True:
 
     if disable_preview or disable_preview_audio or audioing == True or settings == True:
         frame = cv2.imread("/home/%s/Downloads/black.png" % (username))
-        
-    frame = cam.capture_array("lores")
-    frame = cv2.cvtColor(frame, cv2.COLOR_YUV420p2RGB)
+    else:
+        frame = cam.capture_array("lores")
+        frame = cv2.cvtColor(frame, cv2.COLOR_YUV420p2RGB)
+
     #elif mode in {"vda", "vdm"}:
         #frame = cam.capture_array("lores")
         #frame = cv2.cvtColor(frame, cv2.COLOR_YUV420p2RGB)
