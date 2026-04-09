@@ -14,6 +14,7 @@ import os
 import getpass
 
 username = getpass.getuser()
+
 cam = Picamera2()
 
 display = False
@@ -41,10 +42,10 @@ inf_data = {"0": 0}
 inf_high = 0
 asr = 1.5
 
-actions = 1431
-shots = 1380
-video_recorded = 6093
-audio_recorded = 450
+actions = 0
+shots = 0
+video_recorded = 0
+audio_recorded = 0
 
 timelapse = False
 
@@ -341,7 +342,7 @@ def cam_config():
         #still = cam.create_preview_configuration(main= preview_main_data, raw={}, controls= {"FrameRate": fps})
         still = cam.create_still_configuration(lores= {"size": (320, 240), "format": "YUV420"})
         cam.configure(still)
-    elif mode in {"vda", "vd?m"}:
+    elif mode in {"vda", "vdm"}:
         #video = cam.create_video_configuration(main= {"size": (1450, 1088), "format": "RGB888"}, lores= {"size": (320, 240), "format": "YUV420"}, controls= {"FrameRate": fps})
         video = cam.create_video_configuration(lores= {"size": (320, 240), "format": "YUV420"})
         cam.configure(video)
